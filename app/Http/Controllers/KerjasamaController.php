@@ -17,7 +17,7 @@ class KerjasamaController extends Controller
         //$kerjasama = Kerjasama::all();
         //return view('layouts.kerjasama', compact('kerjasama'));
         //return view('layouts.admin/kerjasama.kerjasama', compact('kerjasama'));
-        return view 'Kegiatan';
+        return view('Kegiatan');
     }
 
     /**
@@ -41,7 +41,7 @@ class KerjasamaController extends Controller
         $request->validate([
             'nama_perusahaan' => 'required',
             'keterangan' => 'required',
-          
+
         ]);
         Kerjasama::create($request->all());
         return redirect('admin/kerjasama')->with('status','Data berhasil ditambahkan');
