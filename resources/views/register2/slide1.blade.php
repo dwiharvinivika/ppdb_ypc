@@ -62,7 +62,7 @@
     <div class="col-md-4 col-sm-4  form-group has-feedback">
         <input type="text" name="lulus_thn" maxlength="4" value="{{ old('lulus_thn') }}" class="form-control" id="inputSuccess2" >
     </div>
-    <label class="col-form-label col-md-2 col-sm-2 label-align">Kontak</label>
+    <label class="col-form-label col-md-2 col-sm-2 label-align">Kontak (WA Aktif)</label>
     <div class="col-md-4 col-sm-4  form-group has-feedback">
         <input type="text" name="hp_siswa" maxlength="13" value="{{ old('hp_siswa') }}" class="form-control" id="inputSuccess2">
     </div>
@@ -70,39 +70,26 @@
     <div class="col-md-4 col-sm-4  form-group has-feedback">
         <input type="date" name="tgl_reg" maxlength="15" value="{{ old('tgl_reg') }}" class="form-control" id="inputSuccess2" >
     </div>
-    <label class="col-form-label col-md-2 col-sm-2 label-align">Gelombang</label>
-    <div class="col-md-4 col-sm-4  form-group has-feedback">
-        <select name="gel" class="form-control">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        </select>
-    </div>
     <label class="col-form-label col-md-2 col-sm-2 label-align">Kode Sekolah</label>
     <div class="col-md-4 col-sm-4  form-group has-feedback">
         <input type="text" name="kodesekolah" maxlength="15" value="{{ old('kodesekolah') }}" class="form-control" id="inputSuccess2" >
     </div>
-    <label class="col-form-label col-md-2 col-sm-2 label-align">Kebutuhan Khusus</label>
-    <div class="col-md-4 col-sm-4  form-group has-feedback">
-        <input type="radio" name="kebutuhankhusus"  class="flat"  id="inputSuccess2"> Ya
-        <input type="radio" name="kebutuhankhusus"  class="flat"  id="inputSuccess2"> Tidak
-    </div>
     <label class="col-form-label col-md-2 col-sm-2 label-align">Transportasi</label>
     <div class="col-md-4 col-sm-4  form-group has-feedback">
         <select name="transportasi" class="form-control">
-        <option value="Kendaraan Pribadi">Kendaraan Pribadi</option>
-        <option value="Kendaraan Umum">Kendaraan Umum</option>
-        <option value="Jalan Kaki">Jalan Kaki</option>
+            <option value="Kendaraan Pribadi">Kendaraan Pribadi</option>
+            <option value="Kendaraan Umum">Kendaraan Umum</option>
+            <option value="Jalan Kaki">Jalan Kaki</option>
         </select>
     </div>
     <label class="col-form-label col-md-2 col-sm-2 label-align">Tinggal</label>
     <div class="col-md-4 col-sm-4  form-group has-feedback">
         <select name="tinggal" class="form-control">
-        <option value="Kendaraan Pribadi">Bersama Orangtua</option>
-        <option value="Kendaraan Umum">Bersama Saudara</option>
-        <option value="Jalan Kaki">Pesantren</option>
-        <option value="Jalan Kaki">Kost</option>
-        <option value="Jalan Kaki">Lainnya</option>
+            <option value="Kendaraan Pribadi">Bersama Orangtua</option>
+            <option value="Kendaraan Umum">Bersama Saudara</option>
+            <option value="Jalan Kaki">Pesantren</option>
+            <option value="Jalan Kaki">Kost</option>
+            <option value="Jalan Kaki">Lainnya</option>
         </select>
     </div>
     <label class="col-form-label col-md-2 col-sm-2 label-align">Jumlah Saudara</label>
@@ -110,28 +97,34 @@
         <input type="number" name="jmlsaudara" maxlength="13" value="{{ old('jmlsaudara') }}" class="form-control" id="inputSuccess2">
     </div>
     <label class="col-form-label col-md-2 col-sm-2 label-align">Jarak</label>
-    <div class="col-md-4 col-sm-4  form-group has-feedback">
-        <input type="text" name="jarak" maxlength="13" value="{{ old('jarak') }}" class="form-control" id="inputSuccess2">
+    <div class="col-md-3 col-sm-3 form-group has-feedback">
+        <input type="number" name="jarak" min="0" max="13" value="{{ old('jarak') }}" class="form-control" id="inputSuccess2">
     </div>
-    <label class="col-form-label col-md-2 col-sm-2 label-align">Keterangan Jarak</label>
-    <div class="col-md-4 col-sm-4  form-group has-feedback">
-        <input type="text" name="ketjarak" maxlength="13" value="{{ old('ketjarak') }}" class="form-control" id="inputSuccess2">
+    <div class="col-md-1 col-sm-1 form-group has-feedback">
+        <select name="ketjarak" class="form-control">
+            @foreach (['km', 'hm', 'dm', 'm', 'dll'] as $satuan)
+                <option value="{{ $satuan }}" {{ old('ketjarak')==$satuan?'selected':'' }}>{{ $satuan }}</option>
+            @endforeach
+        </select>
     </div>
     <label class="col-form-label col-md-2 col-sm-2 label-align">Waktu</label>
-    <div class="col-md-4 col-sm-4  form-group has-feedback">
-        <input type="text" name="waktu" maxlength="13" value="{{ old('waktu') }}" class="form-control" id="inputSuccess2">
+    <div class="col-md-2 col-sm-2  form-group has-feedback">
+        <input type="number" name="waktu" max="12" min="0" value="{{ old('waktu') }}" class="form-control" id="inputSuccess2">
     </div>
-    <label class="col-form-label col-md-2 col-sm-2 label-align">Keterangan Waktu</label>
-    <div class="col-md-4 col-sm-4  form-group has-feedback">
-        <input type="text" name="ketwaktu" maxlength="13" value="{{ old('ketwaktu') }}" class="form-control" id="inputSuccess2">
+    <div class="col-md-2 col-sm-2 form-group has-feedback">
+        <select name="ketwaktu" class="form-control">
+            @foreach (['jam', 'menit'] as $satuan)
+                <option value="{{ $satuan }}" {{ old('ketwaktu')==$satuan?'selected':'' }}>{{ $satuan }}</option>
+            @endforeach
+        </select>
     </div>
     <label class="col-form-label col-md-2 col-sm-2 label-align">Penerima KIP</label>
     <div class="col-md-4 col-sm-4  form-group has-feedback">
         <input type="radio" name="kipksp" {{ old('kipksp')=="1"?'checked':'' }} class="flat" value="1" id="inputSuccess2"> Ya
         <input type="radio" name="kipksp" {{ old('kipksp')=="0"?'checked':'' }} class="flat" value="0" id="inputSuccess2"> Tidak
     </div>
-    <label class="col-form-label col-md-2 col-sm-2 label-align">Bukan Penerima KIP</label>
+    <label class="col-form-label col-md-2 col-sm-2 label-align">Kebutuhan Khusus</label>
     <div class="col-md-4 col-sm-4  form-group has-feedback">
-        <input type="radio" name="nokipksp" {{ old('nokipksp')=="1"?'checked':'' }} class="flat" value="1" id="inputSuccess2"> Ya
-        <input type="radio" name="nokipksp" {{ old('nokipksp')=="0"?'checked':'' }} class="flat" value="0" id="inputSuccess2"> Tidak
+        <input type="radio" name="kebutuhankhusus" {{ old('kebutuhankhusus')=='1'?'checked':'' }} class="flat" value="1" id="inputSuccess2"> Ya
+        <input type="radio" name="kebutuhankhusus" {{ old('kebutuhankhusus')=='0'?'checked':'' }} class="flat" value="0" id="inputSuccess2"> Tidak
     </div>

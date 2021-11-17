@@ -45,7 +45,7 @@ class RegisterRequest extends FormRequest
             'transportasi'=>'required',
             'tinggal'=>'required',
             'kipksp'=>'required',
-            'nokipksp'=>'required',
+            // 'nokipksp'=>'required',
             'jmlsaudara'=>'required',
             'jarak'=>'required',
             'ketjarak'=>'required|max:10',

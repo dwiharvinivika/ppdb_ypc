@@ -21,7 +21,7 @@
                       
                     </ul>
                   </li>
-                  <li><a href="javascript:void(0)"><i class="fa fa-money"></i> Pembayaran</a></li>
+                  <li class="{{ request()->is('admin/pembayaran') }}"><a href="/admin/pembayaran"><i class="fa fa-money"></i> Pembayaran</a></li>
                   <li><a href="javascript:void(0)"><i class="fa fa-file-text-o"></i> Nilai Raport</a></li>
                 </ul>
               </div>

@@ -48,19 +48,12 @@ Route::group(['prefix'=>'admin/'], function(){
     Route::view('login_admin','layouts/admin/login_admin');
     Route::view('login_admin','layouts/admin/login_admin');
     Route::view('index','layouts/admin/dashboard');
-    //Route::view('register','layouts/admin/register');
-    //Route::get('register','RegisterController@index');
-    //Route::get('register/{register}','RegisterController@show');
-    //Route::get('jurusan/create_jurusan','JurusanController@create');
-    //Route::get('jurusan','JurusanController@index');
+    
     Route::view('calon_siswa','layouts/admin/calon_siswa');
     Route::view('siswa','layouts/admin/siswa');
+    
     Route::resource('biodata','BiodataController');
-    //Route::get('jurusan/create_jurusan','JurusanController@create');
-    //Route::get('jurusan','JurusanController@index');
-    //Route::get('jurusan','JurusanController@index');
-    //Route::post('jurusan','JurusanController@store');
-
+    
     //prosedur
     Route::get('prosedur','ProsedurController@index');
     Route::get('prosedur/create','ProsedurController@create');
@@ -88,12 +81,6 @@ Route::group(['prefix'=>'admin/'], function(){
     Route::get('register','RegisterController@index');
     Route::post('register','RegisterController@store');
     Route::get('register/{register}','RegisterController@show');
-
-    //Orangtua
-    //Route::get('register','RegisterController@index');
-    Route::get('orangtua/create','OrangtuaController@create');
-    //Route::post('register','OrangtuaController@store');
-    //Route::get('register/{register}','RegisterController@show');
 
     //Slide
     Route::get('slide','ProsedurController@index');

@@ -1,24 +1,23 @@
 @extends('layouts.admin.master_admin')
 
 @section('content')
-<div class="container">
-  @if (session()->has('success'))
-    <div class="alert alert-success">{{ session()->get('success') }}</div>
-  @endif
-  @if($errors->any())
-    <ul class="alert alert-danger">
-      @foreach($errors->all() as $err)
-        <li>{{ $err }}</li>
-      @endforeach
-    </ul>
-  @endif
-
+<div class="container">  
   @if (is_null($gelombang))
     <div class="alert alert-warning">Gelombang Tidak Ditemukan!</div>
   @else
-    <!-- Tabs -->
-    <form action="/admin/register" enctype="multipart/form-data" method="post">
-      <h4 class="text-center" style="margin-top: 10px">Gelombang Ke-{{ $gelombang->gelombang }}</h4>
+  <!-- Tabs -->
+  <form action="/admin/register" enctype="multipart/form-data" method="post">
+      <h4 class="text-center" style="margin-top: 10px">Gelombang Ke-{{ $gelombang->gelombang }} Tahun Ajaran {{ $gelombang->tahun_ajaran->tahun_ajaran }}</h4>
+      @if (session()->has('success'))
+        <div class="alert alert-success">{{ session()->get('success') }}</div>
+      @endif
+      @if($errors->any())
+        <ul class="alert alert-danger">
+          @foreach($errors->all() as $err)
+          <li>{{ $err }}</li>
+          @endforeach
+        </ul>
+      @endif
       @csrf
       <div id="wizard" class="form_wizard wizard_horizontal" style="margin-top: 20px">
         <ul class="wizard_steps">

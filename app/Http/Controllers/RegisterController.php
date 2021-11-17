@@ -46,10 +46,7 @@ class RegisterController extends Controller
     {
         $date = date('Y-m-d');
         $gelombang = Gelombang::where('pendaftaran_awal', '<=', $date)
-                                ->where('pendaftaran_akhir', '>=', $date)->first();
-        if(is_null($gelombang)){
-            return abort(403, 'Gelombang tidak ditemukan..');
-        }
+                                ->where('pendaftaran_akhir', '>=', $date)->firstOrFail();
 
         $foto = 'foto_'.date('Y-m-d').'.'.$request->file('foto')->getClientOriginalExtension();
         $ijazah = 'ijazah_'.date('Y-m-d').'.'.$request->file('ijazah')->getClientOriginalExtension();
