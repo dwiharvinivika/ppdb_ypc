@@ -27,7 +27,7 @@ class KerjasamaController extends Controller
      */
     public function create()
     {
-        return view('layouts/admin/kerjasama.create');
+        return view('admin/kerjasama.create');
     }
 
     /**
@@ -66,7 +66,7 @@ class KerjasamaController extends Controller
      */
     public function edit(Kerjasama $kerjasama)
     {
-        return view('layouts/admin/kerjasama.edit', compact('kerjasama'));
+        return view('admin/kerjasama.edit', compact('kerjasama'));
     }
 
     /**

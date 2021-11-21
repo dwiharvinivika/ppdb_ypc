@@ -15,8 +15,8 @@ class GelombangController extends Controller
     public function index()
     {
         $gelombang = Gelombang::all();
-        // return view('layouts.jadwal', compact('gelombang'));
-        return view('layouts.admin/gelombang.gelombang', compact('gelombang'));
+        // return view('jadwal', compact('gelombang'));
+        return view('admin/gelombang.gelombang', compact('gelombang'));
     }
 
     /**

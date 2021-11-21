@@ -18,7 +18,7 @@
     <link href="{{asset('backend') }}/vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
     <link href="{{asset('backend') }}/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-	
+
     <!-- bootstrap-progressbar -->
     <link href="{{asset('backend') }}/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
     <!-- JQVMap -->
@@ -30,6 +30,8 @@
     <link href="{{asset('backend') }}/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('backend') }}/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('backend') }}/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Switch -->
+    <link rel="stylesheet" href="{{ asset('backend/vendors/bootstrap-switch-3.3.4/dist/css/bootstrap3/bootstrap-switch.min.css') }}">
     <!-- Custom Theme Style -->
     <link href="{{asset('backend') }}/build/css/custom.min.css" rel="stylesheet">
   </head>
@@ -60,7 +62,7 @@
             <br />
 
             <!-- sidebar menu -->
-            @include('layouts/admin.lay.sidebar')
+            @include('layouts.admin.includes.sidebar')
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
@@ -180,7 +182,7 @@
           @yield('content')
         </div>
         <!-- /page content -->
-        
+
         <!-- footer content -->
         <footer>
           <div class="pull-right">
@@ -206,6 +208,8 @@
     <script src="{{asset('backend') }}/vendors/gauge.js/dist/gauge.min.js"></script>
     <!-- bootstrap-progressbar -->
     <script src="{{asset('backend') }}/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- bootstrap-switch -->
+    <script src="{{asset('backend/vendors/bootstrap-switch-3.3.4/dist/js/bootstrap-switch.min.js') }}"></script>
     <!-- iCheck -->
     <script src="{{asset('backend') }}/vendors/iCheck/icheck.min.js"></script>
     <!-- Skycons -->
@@ -248,6 +252,8 @@
     <!-- Custom Theme Scripts -->
     <script src="{{asset('backend') }}/build/js/custom.js"></script>
     <!-- jQuery Smart Wizard -->
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{asset('backend') }}/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
+    @stack('js')
   </body>
 </html>

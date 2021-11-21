@@ -14,46 +14,47 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layouts/home');
+    return view('home');
 });
 
-Route::view('home','layouts/home');
-//Route::view('pendaftaran','layouts/pendaftaran');
-Route::view('fasilitas','layouts/fasilitas');
-Route::view('kegiatan','layouts/kegiatan');
+Route::view('home','home');
+//Route::view('pendaftaran','pendaftaran');
+Route::view('fasilitas','fasilitas');
+Route::view('kegiatan','kegiatan');
 
-//Route::view('prosedur','layouts/prosedur');
+//Route::view('prosedur','prosedur');
 Route::get('prosedur','ProsedurController@index');
 Route::get('jurusan','JurusanController@index');
 //Route::view('jurusan','JurusanController@index');
-Route::view('cek_hasil','layouts/cek_hasil');
-Route::view('hasil','layouts/hasil');
-//Route::view('jadwal','layouts/jadwal');
+Route::view('cek_hasil','cek_hasil');
+Route::view('hasil','hasil');
+//Route::view('jadwal','jadwal');
 Route::get('jadwal','GelombangController@index');
-Route::view('contact','layouts/contact');
+Route::view('contact','contact');
 
 //pendaftaran_calon_siswa
-Route::view('pendaftaran','layouts/admin/pendaftaran');
+Route::view('pendaftaran','admin/pendaftaran');
 
 Route::get('kerjasama','KerjasamaController@index');
 
 //testimoni
-//Route::view('/testimoni','layouts/create');
+//Route::view('/testimoni','create');
 Route::get('/testimoni','TestimoniController@index');
 Route::get('/testimoni/create','TestimoniController@create');
 Route::post('/testimoni','TestimoniController@store');
 
 Route::group(['prefix'=>'admin/'], function(){
-    //Route::view('kerjasama','layouts/kerjasama');
-    Route::view('login_admin','layouts/admin/login_admin');
-    Route::view('login_admin','layouts/admin/login_admin');
-    Route::view('index','layouts/admin/dashboard');
-    
-    Route::view('calon_siswa','layouts/admin/calon_siswa');
-    Route::view('siswa','layouts/admin/siswa');
-    
+    //Route::view('kerjasama','kerjasama');
+    Route::view('login_admin','admin/login_admin');
+    Route::view('login_admin','admin/login_admin');
+    Route::view('index','admin/dashboard');
+
+    Route::get('calon_siswa', 'PesertaController@index');
+    Route::get('siswa', 'PesertaController@siswa');
+    Route::post('siswa/{peserta}', 'PesertaController@update');
+
     Route::resource('biodata','BiodataController');
-    
+
     //prosedur
     Route::get('prosedur','ProsedurController@index');
     Route::get('prosedur/create','ProsedurController@create');
@@ -81,6 +82,9 @@ Route::group(['prefix'=>'admin/'], function(){
     Route::get('register','RegisterController@index');
     Route::post('register','RegisterController@store');
     Route::get('register/{register}','RegisterController@show');
+
+    //Pembayaran calon siswa
+    Route::resource('pembayaran', PembayaranController::class);
 
     //Slide
     Route::get('slide','ProsedurController@index');

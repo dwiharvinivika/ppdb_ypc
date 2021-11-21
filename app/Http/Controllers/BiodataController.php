@@ -15,9 +15,9 @@ class BiodataController extends Controller
     public function index()
     {
         $biodata = Biodata::latest()->paginate(5);
-        return view('layouts/admin.index',compact('biodata'))->with('i', (request()->input('page', 1) - 1) * 5);
-        
-        
+        return view('admin.index',compact('biodata'))->with('i', (request()->input('page', 1) - 1) * 5);
+
+
     }
 
     /**
@@ -44,7 +44,7 @@ class BiodataController extends Controller
         ]);
         Biodata::create($request->all());
         return redirect()->route('biodata.index')->with('success','Data berhasil di input');
-    
+
     }
 
     /**
@@ -66,8 +66,8 @@ class BiodataController extends Controller
      */
     public function edit(Biodata $biodata)
     {
-       
-        
+
+
     }
 
     /**
@@ -97,6 +97,6 @@ class BiodataController extends Controller
     {
         $biodata->delete();
         return redirect()->route('biodata.index')->with('success','Biodata berhasil dihapus');
-    
+
     }
 }

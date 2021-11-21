@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Gelombang;
 use App\Jurusan;
 use Illuminate\Http\Request;
 
@@ -15,9 +16,9 @@ class JurusanController extends Controller
     public function index()
     {
         $jurusan = Jurusan::all();
-        return view('layouts.jurusan', compact('jurusan'));
-        //return view('layouts.admin/jurusan.jurusan', compact('jurusan'));
-     
+        return view('jurusan', compact('jurusan'));
+        //return view('admin/jurusan.jurusan', compact('jurusan'));
+
     }
 
     /**
@@ -27,7 +28,7 @@ class JurusanController extends Controller
      */
     public function create()
     {
-        
+
         return view('layouts/admin/jurusan.create');
     }
 
@@ -42,8 +43,8 @@ class JurusanController extends Controller
         $request->validate([
             'kode_jurusan' => 'required',
             'jurusan' => 'required',
-            'gambar' => 'required'  
-          
+            'gambar' => 'required'
+
         ]);
         Jurusan::create($request->all());
         return redirect('admin/jurusan')->with('status','Data berhasil ditambahkan');

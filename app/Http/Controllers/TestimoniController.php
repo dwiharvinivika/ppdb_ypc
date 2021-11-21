@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Prosedur;
 use App\Testimoni;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class TestimoniController extends Controller
     public function index()
     {
         $testimoni = Testimoni::all();
-        return view('layouts.home', compact('testimoni'));
+        return view('home', compact('testimoni'));
     }
 
     /**
@@ -25,7 +26,7 @@ class TestimoniController extends Controller
      */
     public function create()
     {
-        return view('layouts.create');
+        return view('create');
     }
 
     /**
@@ -39,7 +40,7 @@ class TestimoniController extends Controller
          $request->validate([
             'prosedur' => 'required',
             'gambar' => 'required'
-          
+
         ]);
         Prosedur::create($request->all());
         return redirect('admin/prosedur')->with('status','Data berhasil ditambahkan');

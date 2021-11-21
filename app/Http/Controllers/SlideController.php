@@ -37,20 +37,16 @@ class SlideController extends Controller
     {
         $request->validate([
             'slide' => 'mimes:jpg,gif,svg,png'
-         
-          
         ]);
 
         $imgName = $request->slide->getClientOriginalName() . '-' . time()
                                 . '.' . $request->slide->extension();
         $request->slide->move(public_path('image/slide'), $imgName);
         Slide::create([
-            
             'slide' => $imgName
         ]);
-            
-        return redirect('admin/prosedur')->with('status','Data berhasil ditambahkan');
 
+        return redirect('admin/prosedur')->with('status','Data berhasil ditambahkan');
     }
 
     /**

@@ -15,9 +15,9 @@ class KegiatanController extends Controller
     public function index()
     {
         $kegiatan = Kegiatan::all();
-        //return view('layouts.prosedur', compact('prosedur'));
-       // return view('layouts.admin.jurusan', compact('jurusan'));
-       return view('layouts.admin/kegiatan.kegiatan', compact('kegiatan'));
+        //return view('prosedur', compact('prosedur'));
+       // return view('admin.jurusan', compact('jurusan'));
+       return view('admin/kegiatan.kegiatan', compact('kegiatan'));
     }
 
     /**
@@ -43,7 +43,7 @@ class KegiatanController extends Controller
             'kegiatan' => 'required',
             'gambar' => 'required',
             'keterangan' => 'required'
-          
+
         ]);
 
         $imgName = $request->gambar->getClientOriginalName() . '-' . time()
@@ -54,10 +54,10 @@ class KegiatanController extends Controller
             'gambar' => $imgName,
             'keterangan' => $request->keterangan
         ]);
-            
-        return redirect('admin/kegiatan')->with('status','Data berhasil ditambahkan'); 
+
+        return redirect('admin/kegiatan')->with('status','Data berhasil ditambahkan');
     }
-    
+
 
     /**
      * Display the specified resource.

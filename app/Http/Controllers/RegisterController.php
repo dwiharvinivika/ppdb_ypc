@@ -19,7 +19,7 @@ class RegisterController extends Controller
     public function index()
     {
         $register = Register::all();
-      
+
         return view('register.register', compact('register'));
     }
 
@@ -50,13 +50,17 @@ class RegisterController extends Controller
 
         $foto = 'foto_'.date('Y-m-d').'.'.$request->file('foto')->getClientOriginalExtension();
         $ijazah = 'ijazah_'.date('Y-m-d').'.'.$request->file('ijazah')->getClientOriginalExtension();
-        
-        $request->file('foto')->move('/files-register', $foto);
-        $request->file('ijazah')->move('/files-register', $foto);
-        
-        Register::create($request->merge(['foto'=>$foto,'ijazah'=>$ijazah, 'gelombang_id'=>$gelombang->id])->toArray());
+
+        $request->file('foto')->storeAs('files-register', $foto);
+        $request->file('ijazah')->storeAs('files-register', $ijazah);
+
+        $register = $request->merge(['gelombang_id'=>$gelombang->id])->toArray();
+        $register['foto'] = $foto;
+        $register['ijazah'] = $ijazah;
+
+        Register::create($register);
         Orangtua::create($request->all());
-    
+
         return back()->with('success', 'Register berhasil dilakukan.');
     }
 
@@ -68,7 +72,7 @@ class RegisterController extends Controller
      */
     public function show(Register $register)
     {
-        return view('register.detail_register', compact('register'));
+        return request()->ajax()?response()->json($register):view('register.detail_register', compact('register'));
     }
 
     /**

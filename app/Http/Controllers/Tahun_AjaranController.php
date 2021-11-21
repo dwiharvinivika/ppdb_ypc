@@ -15,8 +15,8 @@ class Tahun_AjaranController extends Controller
     public function index()
     {
         $tahun_ajaran = Tahun_Ajaran::all();
-        return view('layouts.admin/tahun_ajaran.tahun_ajaran', compact('tahun_ajaran'));
-       
+        return view('admin/tahun_ajaran.tahun_ajaran', compact('tahun_ajaran'));
+
     }
 
     /**

@@ -15,9 +15,9 @@ class ProsedurController extends Controller
     public function index()
     {
         $prosedur = Prosedur::all();
-        return view('layouts.prosedur', compact('prosedur'));
-       // return view('layouts.admin.jurusan', compact('jurusan'));
-       //return view('layouts.admin/prosedur.prosedur', compact('prosedur'));
+        return view('prosedur', compact('prosedur'));
+       // return view('admin.jurusan', compact('jurusan'));
+       //return view('admin/prosedur.prosedur', compact('prosedur'));
     }
 
     /**
@@ -38,12 +38,12 @@ class ProsedurController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $request->validate([
             'gambar' => 'mimes:jpg,gif,svg,png',
             'prosedur' => 'required',
             'gambar' => 'required'
-          
+
         ]);
 
         $imgName = $request->gambar->getClientOriginalName() . '-' . time()
@@ -53,7 +53,7 @@ class ProsedurController extends Controller
             'prosedur' => $request->prosedur,
             'gambar' => $imgName
         ]);
-            
+
         return redirect('admin/prosedur')->with('status','Data berhasil ditambahkan');
     }
 

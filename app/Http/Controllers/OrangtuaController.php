@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Orangtua;
+use App\Register;
 use Illuminate\Http\Request;
 
 class OrangtuaController extends Controller
@@ -24,7 +25,7 @@ class OrangtuaController extends Controller
      */
     public function create()
     {
-        return view('layouts/admin/orangtua.create');
+        return view('admin/orangtua.create');
     }
 
     /**
@@ -45,8 +46,8 @@ class OrangtuaController extends Controller
         $register->pekerjaan_wali=$request->sekolah;
         $register->alamat_orangtua=$request->alamat_orangtua;
         $register->kontak=$request->kontak;
-        
-        
+
+
 
         $register->save();
         return $register;
@@ -60,7 +61,7 @@ class OrangtuaController extends Controller
      */
     public function show(Orangtua $orangtua)
     {
-        return view('layouts/admin/orangtua.create');
+        return view('admin/orangtua.create');
     }
 
     /**
