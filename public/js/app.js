@@ -3314,6 +3314,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
 // require('./bootstrap');
 
+window.Swal = sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a;
 window.Toast = sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
   toast: true,
   animation: true,

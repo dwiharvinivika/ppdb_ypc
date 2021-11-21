@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   	<link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>Gentelella Alela! | </title>
+    <title>PPDB SMK YPC</title>
 
     <!-- Bootstrap -->
     <link href="{{asset('backend') }}/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -253,6 +253,32 @@
     <script src="{{asset('backend') }}/build/js/custom.js"></script>
     <!-- jQuery Smart Wizard -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @if (session()->has('success'))
+        <script>
+            Toast.fire({
+                icon: 'success',
+                title: "{{ session('success') }}"
+            })
+        </script>
+    @endif
+    <script>
+        $('.delete-data').on('click', function(e){
+            e.preventDefault()
+            Swal.fire({
+                icon: 'warning',
+                title: 'Apakah kamu yakin menghapusnya?',
+                showCancelButton: true,
+                cancelButtonText: 'Batal',
+                confirmButtonText: 'Ya',
+                cancelButtonColor: '#007bff',
+                confirmButtonColor: '#dc3545',
+            }).then(result=>{
+                if(result.isConfirmed){
+                    $(this).parent().submit()
+                }
+            })
+        })
+    </script>
     <script src="{{asset('backend') }}/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
     @stack('js')
   </body>

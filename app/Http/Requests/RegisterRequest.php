@@ -23,7 +23,7 @@ class RegisterRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'nisn'=>'required|max:30',
             'nik'=>'required',
             'nama'=>'required',
@@ -51,20 +51,25 @@ class RegisterRequest extends FormRequest
             'ketjarak'=>'required|max:10',
             'waktu'=>'required',
             'ketwaktu'=>'required|max:15',
-            
+
             //Bagian orang tua
-            'nama_ayah'=>'required', 
-            'nama_ibu'=>'required', 
-            'nama_wali'=>'required', 
-            'pekerjaan_ayah'=>'required', 
-            'pekerjaan_ibu'=>'required', 
-            'pekerjaan_wali'=>'required', 
-            'alamat_orangtua'=>'required', 
+            'nama_ayah'=>'required',
+            'nama_ibu'=>'required',
+            'nama_wali'=>'required',
+            'pekerjaan_ayah'=>'required',
+            'pekerjaan_ibu'=>'required',
+            'pekerjaan_wali'=>'required',
+            'alamat_orangtua'=>'required',
             'kontak'=>'required',
-            
+
             //Bagian data file
             'foto'=>'required|image',
             'ijazah'=>'required|image',
         ];
+        if(request()->routeIs('register.update')){
+            unset($rules['foto']);
+            unset($rules['ijazah']);
+        }
+        return $rules;
     }
 }

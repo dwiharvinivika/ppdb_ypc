@@ -11,7 +11,7 @@
         <li>{{ $err }}</li>
       @endforeach
     </ul>
-  @endif  
+  @endif
   @if (is_null($gelombang))
     <div class="alert alert-warning">Gelombang Tidak Ditemukan!</div>
   @else
@@ -41,13 +41,13 @@
           </li>
         </ul>
         <div id="step-1">
-          @include('register.slide1')
+          @include('admin.register.slide1')
         </div>
         <div id="step-2">
-          @include('register.slide2')
+          @include('admin.register.slide2')
         </div>
         <div id="step-3">
-          @include('register.slide3')
+          @include('admin.register.slide3')
         </div>
       </div>
     </form>
@@ -58,14 +58,14 @@
 @push('css')
   {{-- <link rel="stylesheet" href="{{ asset('backend/vendors/jQuery-Smart-Wizard/styles/smart_wizard.css') }}">
   <link rel="stylesheet" href="{{ asset('backend/vendors/jQuery-Smart-Wizard/styles/demo_style.css') }}"> --}}
-  <link href="{{asset('css/bootstrap4.css') }}" rel="stylesheet"> 
-  <link href="{{asset('css/custom.css') }}" rel="stylesheet"> 
+  <link href="{{asset('css/bootstrap4.css') }}" rel="stylesheet">
+  <link href="{{asset('css/custom.css') }}" rel="stylesheet">
 @endpush
 
 @push('js')
     <!-- Contact Form JavaScript File -->
     <script src="{{ asset('contactform/contactform.js') }}"></script>
-  
+
     <!-- jQuery Smart Wizard -->
     <script src="{{asset('backend') }}/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
     <script>
@@ -87,7 +87,7 @@
         $('.buttonFinish').addClass('btn btn-info');
 
         $('.buttonFinish').on('click', function(){
-            
+
         })
       };
       init_SmartWizard()

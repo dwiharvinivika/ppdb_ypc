@@ -71,7 +71,7 @@
 
     <!-- section featured -->
     @yield('content')
-   
+
     <!-- /section featured -->
 
     <section id="content">
@@ -199,11 +199,11 @@
             <div class="solidline"></div>
           </div>
         </div>
-        @include('layouts.testi_alumni');
+        @include('testi_alumni');
       </div>
     </section>
 
-    @include('layouts/footer')
+    @include('layouts.footer')
   </div>
   <a href="#" class="scrollup"><i class="icon-angle-up icon-square icon-bglight icon-2x active"></i></a>
 

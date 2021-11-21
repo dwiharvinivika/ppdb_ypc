@@ -79,9 +79,7 @@ Route::group(['prefix'=>'admin/'], function(){
     Route::resource('kerjasama', KerjasamaController::class);
 
     //Register
-    Route::get('register','RegisterController@index');
-    Route::post('register','RegisterController@store');
-    Route::get('register/{register}','RegisterController@show');
+    Route::resource('register', RegisterController::class);
 
     //Pembayaran calon siswa
     Route::resource('pembayaran', PembayaranController::class);

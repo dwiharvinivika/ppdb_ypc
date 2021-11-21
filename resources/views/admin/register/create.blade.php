@@ -11,11 +11,8 @@
                         <div class="alert alert-warning">Gelombang Tidak Ditemukan!</div>
                     @else
                     <!-- Tabs -->
-                    <form action="/admin/register" enctype="multipart/form-data" method="post">
+                    <form action="{{ $action }}" enctype="multipart/form-data" method="post">
                         <h4 class="text-center" style="margin-top: 10px">Gelombang Ke-{{ $gelombang->gelombang }} Tahun Ajaran {{ $gelombang->tahun_ajaran->tahun_ajaran }}</h4>
-                        @if (session()->has('success'))
-                            <div class="alert alert-success">{{ session()->get('success') }}</div>
-                        @endif
                         @if($errors->any())
                             <ul class="alert alert-danger">
                             @foreach($errors->all() as $err)
@@ -24,6 +21,9 @@
                             </ul>
                         @endif
                         @csrf
+                        @if (request()->routeIs('register.edit'))
+                            @method('put')
+                        @endif
                         <div id="wizard" class="form_wizard wizard_horizontal" style="margin-top: 20px">
                             <ul class="wizard_steps">
                             <li>
@@ -46,18 +46,18 @@
                             </li>
                             </ul>
                             <div id="step-1">
-                            @include('register2.slide1')
+                            @include('admin.register.slide1')
                             </div>
                             <div id="step-2">
-                            @include('register2.slide2')
+                            @include('admin.register.slide2')
                             </div>
                             <div id="step-3">
-                            @include('register2.slide3')
+                            @include('admin.register.slide3')
                             </div>
                         </div>
                         </form>
                     @endif
-                    </div>
+                </div>
             </div>
         </div>
     </div>

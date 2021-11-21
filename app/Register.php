@@ -21,6 +21,16 @@ class Register extends Model
         return $this->hasOne(Peserta::class);
     }
 
+    public function orangtua()
+    {
+        return $this->hasOne(Orangtua::class);
+    }
+
+    public function gelombang()
+    {
+        return $this->belongsTo(Gelombang::class);
+    }
+
     public function getStatusPembayaranAttribute()
     {
         if($this->pembayaran()->exists()){

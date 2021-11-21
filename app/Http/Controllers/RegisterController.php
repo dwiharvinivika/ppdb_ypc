@@ -20,7 +20,7 @@ class RegisterController extends Controller
     {
         $register = Register::all();
 
-        return view('register.register', compact('register'));
+        return view('admin.register.index', compact('register'));
     }
 
     /**
@@ -30,10 +30,11 @@ class RegisterController extends Controller
      */
     public function create()
     {
+        $action = '/admin/register';
         $date = date('Y-m-d');
         $gelombang = Gelombang::where('pendaftaran_awal', '<=', $date)
                                 ->where('pendaftaran_akhir', '>=', $date)->first();
-        return view('register2.create', compact('gelombang'));
+        return view('admin.register.create', compact('gelombang', 'action'));
     }
 
     /**
@@ -58,10 +59,11 @@ class RegisterController extends Controller
         $register['foto'] = $foto;
         $register['ijazah'] = $ijazah;
 
-        Register::create($register);
-        Orangtua::create($request->all());
+        $id = Register::create($register)->id;
+        Orangtua::create($request->merge(['register_id'=>$id])->toArray());
 
-        return back()->with('success', 'Register berhasil dilakukan.');
+        $url = request()->is('/register')? back() : redirect('admin/register');
+        return $url->with('success', 'Register berhasil dilakukan.');
     }
 
     /**
@@ -72,7 +74,7 @@ class RegisterController extends Controller
      */
     public function show(Register $register)
     {
-        return request()->ajax()?response()->json($register):view('register.detail_register', compact('register'));
+        return request()->ajax()?response()->json($register):view('admin.register.detail_register', compact('register'));
     }
 
     /**
@@ -83,7 +85,11 @@ class RegisterController extends Controller
      */
     public function edit(Register $register)
     {
-        //
+        $action = route('register.update', $register);
+        $date = date('Y-m-d');
+        $gelombang = Gelombang::where('pendaftaran_awal', '<=', $date)
+                                ->where('pendaftaran_akhir', '>=', $date)->first();
+        return view('admin.register.create', compact('gelombang', 'action', 'register'));
     }
 
     /**
@@ -93,9 +99,28 @@ class RegisterController extends Controller
      * @param  \App\Register  $register
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Register $register)
+    public function update(RegisterRequest $request, Register $register)
     {
-        //
+        $date = date('Y-m-d');
+        $gelombang = Gelombang::where('pendaftaran_awal', '<=', $date)
+                                ->where('pendaftaran_akhir', '>=', $date)->firstOrFail();
+
+        $data = $request->merge(['gelombang_id'=>$gelombang->id])->toArray();
+        if($request->hasFile('foto')){
+            $foto = 'foto_'.date('Y-m-d').'.'.$request->file('foto')->getClientOriginalExtension();
+            $request->file('foto')->storeAs('files-register', $foto);
+            $data['foto'] = $foto;
+        }
+        if($request->hasFile('ijazah')){
+            $ijazah = 'ijazah_'.date('Y-m-d').'.'.$request->file('ijazah')->getClientOriginalExtension();
+            $request->file('ijazah')->storeAs('files-register', $ijazah);
+            $data['ijazah'] = $ijazah;
+        }
+
+        $register->update($data);
+        $register->orangtua->update($request->all());
+
+        return redirect('admin/register')->with('success', 'Data Register berhasil diubah.');
     }
 
     /**
@@ -106,6 +131,10 @@ class RegisterController extends Controller
      */
     public function destroy(Register $register)
     {
-        //
+        $register->pembayaran()->delete();
+        $register->peserta()->delete();
+        $register->orangtua()->delete();
+        $register->delete();
+        return back()->with('success', 'Data Register berhasil dihapus.');
     }
 }

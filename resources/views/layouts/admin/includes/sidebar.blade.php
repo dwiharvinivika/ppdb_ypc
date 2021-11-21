@@ -14,7 +14,7 @@
             <li>
                 <a><i class="fa fa-user"></i> Data Peserta/Siswa <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                    <li class="{{ request()->is('admin/register')?'active':'' }}"><a href="/admin/register">Register</a></li>
+                    <li class="{{ request()->routeIs('register.*')?'active':'' }}"><a href="/admin/register">Register</a></li>
                     <li class="{{ request()->is('admin/calon_siswa')?'active':'' }}"><a href="/admin/calon_siswa">Calon Siswa</a></li>
                     <li class="{{ request()->is('admin/siswa')?'active':'' }}"><a href="/admin/siswa">Siswa</a></li>
                 </ul>
