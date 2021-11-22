@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Peserta;
-use App\Register;
+use App\Models\Peserta;
+use App\Models\Register;
 use Illuminate\Http\Request;
 
 class PesertaController extends Controller

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Kerjasama;
+use App\Models\Kerjasama;
 use Illuminate\Http\Request;
 
 class KerjasamaController extends Controller

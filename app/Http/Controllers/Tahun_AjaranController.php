@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Tahun_Ajaran;
+use App\Models\Tahun_Ajaran;
 use Illuminate\Http\Request;
 
 class Tahun_AjaranController extends Controller

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Orangtua;
-use App\Register;
+use App\Models\Orangtua;
+use App\Models\Register;
 use Illuminate\Http\Request;
 
 class OrangtuaController extends Controller

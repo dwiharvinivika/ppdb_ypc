@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Fasilitas;
+use App\Models\Fasilitas;
 use Illuminate\Http\Request;
 
 class FasilitasController extends Controller

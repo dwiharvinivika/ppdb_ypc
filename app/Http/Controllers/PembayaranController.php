@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Pembayaran;
-use App\Peserta;
-use App\Register;
+use App\Models\Pembayaran;
+use App\Models\Peserta;
+use App\Models\Register;
 use Illuminate\Http\Request;
 
 class PembayaranController extends Controller

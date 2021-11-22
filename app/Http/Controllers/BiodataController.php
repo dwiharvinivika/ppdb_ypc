@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Biodata;
+use App\Models\Biodata;
 use Illuminate\Http\Request;
 
 class BiodataController extends Controller

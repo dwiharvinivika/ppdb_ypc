@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Gelombang;
-use App\Jurusan;
+use App\Models\Gelombang;
+use App\Models\Jurusan;
 use Illuminate\Http\Request;
 
 class JurusanController extends Controller

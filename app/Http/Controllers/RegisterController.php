@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Register;
-use App\Gelombang;
-use App\Orangtua;
-use App\File;
-use Illuminate\Http\Request;
+use App\Models\Register;
+use App\Models\Gelombang;
+use App\Models\Orangtua;
 use App\Http\Requests\RegisterRequest;
 
 class RegisterController extends Controller

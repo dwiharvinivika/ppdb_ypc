@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Prosedur;
-use App\Testimoni;
+use App\Models\Prosedur;
+use App\Models\Testimoni;
 use Illuminate\Http\Request;
 
 class TestimoniController extends Controller
