@@ -38,6 +38,7 @@ class Register extends Model
 
     public function getUniqCodeAttribute()
     {
+        if(!is_null($this->peserta)) return $this->peserta->no_peserta;
         // Mendapatkan tahun ajaranya
         $tahun_ajar = $this->tahun_ajaran->tahun_ajaran;
         $tahun_ajar = explode('/', $tahun_ajar);
