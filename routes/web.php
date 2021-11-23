@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Gelombang;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -110,4 +111,10 @@ Route::group(['prefix'=>'admin/'], function(){
     Route::get('tahun_ajaran/{tahun_ajaran}/edit','Tahun_AjaranController@edit');
 });
 
-Route::get('register','RegisterController@create');
+Route::get('register', function(){
+    $action = '/admin/register';
+    $date = date('Y-m-d');
+    $gelombang = Gelombang::where('pendaftaran_awal', '<=', $date)
+                            ->where('pendaftaran_akhir', '>=', $date)->first();
+    return view('register.create', compact('gelombang', 'action'));
+});

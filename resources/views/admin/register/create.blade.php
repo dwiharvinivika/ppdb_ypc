@@ -55,7 +55,7 @@
                             @include('admin.register.slide3')
                             </div>
                         </div>
-                        </form>
+                    </form>
                     @endif
                 </div>
             </div>

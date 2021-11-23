@@ -231,6 +231,7 @@
 
   <!-- Template Custom JavaScript File -->
   <script src="{{ asset('js/custom.js') }}"></script>
+  <script src="{{ asset('js/app.js') }}"></script>
   @stack('js')
 </body>
 </html>

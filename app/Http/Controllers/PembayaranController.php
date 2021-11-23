@@ -89,7 +89,7 @@ class PembayaranController extends Controller
         Peserta::updateOrCreate([
             'register_id' => $pembayaran
         ],[
-            'no_peserta' => date('Ymdhis'),
+            'no_peserta' => Register::find($pembayaran)->uniq_code,
         ]);
 
         Pembayaran::updateOrCreate([
