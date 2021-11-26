@@ -15,7 +15,6 @@ class GelombangController extends Controller
     public function index()
     {
         $gelombang = Gelombang::all();
-        // return view('jadwal', compact('gelombang'));
         return view('admin/gelombang.gelombang', compact('gelombang'));
     }
 
@@ -26,7 +25,7 @@ class GelombangController extends Controller
      */
     public function create()
     {
-        return view('layouts/admin/gelombang.create');
+        return view('admin.gelombang.create');
     }
 
     /**
@@ -46,7 +45,7 @@ class GelombangController extends Controller
             'daftar_ulang' => 'required'
         ]);
         Gelombang::create($validate);
-        return redirect('admin/gelombang')->with('status','Data berhasil ditambahkan');
+        return redirect('admin/gelombang')->with('success','Data berhasil ditambahkan');
     }
 
     /**
@@ -68,7 +67,7 @@ class GelombangController extends Controller
      */
     public function edit(Gelombang $gelombang)
     {
-        return view('layouts/admin/gelombang.edit', compact('gelombang'));
+        return view('admin.gelombang.edit', compact('gelombang'));
     }
 
     /**
@@ -80,14 +79,13 @@ class GelombangController extends Controller
      */
     public function update(Request $request, Gelombang $gelombang)
     {
-        Gelombang::where('id', $gelombang->id)
-                ->update([
-                    'gelombang' => $request->gelombang,
-                    'pendaftaran' => $request->pendaftaran,
-                    'pengumuman' => $request->pengumuman,
-                    'daftar_ulang' => $request->daftar_ulang
-                ]);
-                return redirect('admin/gelombang')->with('status','Data berhasil diubah');
+        $gelombang->update([
+            'gelombang' => $request->gelombang,
+            'pendaftaran' => $request->pendaftaran,
+            'pengumuman' => $request->pengumuman,
+            'daftar_ulang' => $request->daftar_ulang
+        ]);
+        return redirect('admin/gelombang')->with('success','Data berhasil diubah');
     }
 
     /**
@@ -98,7 +96,7 @@ class GelombangController extends Controller
      */
     public function destroy(Gelombang $gelombang)
     {
-        Gelombang::destroy($gelombang->id);
-        return redirect('admin/gelombang')->with('status','Data berhasil dihapus');
+        $gelombang->delete();
+        return redirect('admin/gelombang')->with('success','Data berhasil dihapus');
     }
 }

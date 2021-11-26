@@ -60,7 +60,9 @@ class RegisterController extends Controller
         $id = Register::create($register)->id;
         Orangtua::create($request->merge(['register_id'=>$id])->toArray());
 
-        $url = request()->is('/register')? back() : redirect('admin/register');
+        // $this->whatsappNotification($request->hp_siswa);
+
+        $url = auth()->check()?redirect('admin/register'):back();
         return $url->with('success', 'Register berhasil dilakukan.');
     }
 
@@ -134,5 +136,17 @@ class RegisterController extends Controller
         $register->orangtua()->delete();
         $register->delete();
         return back()->with('success', 'Data Register berhasil dihapus.');
+    }
+
+    public function whatsappNotification(string $recipient)
+    {
+        // $sid    = getenv("TWILIO_AUTH_SID");
+        // $token  = getenv("TWILIO_AUTH_TOKEN");
+        // $wa_from= getenv("TWILIO_WHATSAPP_FROM");
+        // $twilio = new \Twilio\Rest\Client($sid, $token);
+
+        // $body = "Hello, welcome to codelapan.com.";
+
+        // return $twilio->messages->create("whatsapp:$recipient",["from" => "whatsapp:$wa_from", "body" => $body]);
     }
 }

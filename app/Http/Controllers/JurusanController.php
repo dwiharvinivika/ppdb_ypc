@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Gelombang;
 use App\Models\Jurusan;
 use Illuminate\Http\Request;
 
@@ -16,8 +15,7 @@ class JurusanController extends Controller
     public function index()
     {
         $jurusan = Jurusan::all();
-        return view('jurusan', compact('jurusan'));
-        //return view('admin/jurusan.jurusan', compact('jurusan'));
+        return view('admin.jurusan.index', compact('jurusan'));
 
     }
 
@@ -28,8 +26,7 @@ class JurusanController extends Controller
      */
     public function create()
     {
-
-        return view('layouts/admin/jurusan.create');
+        return view('admin.jurusan.create');
     }
 
     /**
@@ -40,14 +37,14 @@ class JurusanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validate = $request->validate([
             'kode_jurusan' => 'required',
             'jurusan' => 'required',
-            'gambar' => 'required'
-
+            'gambar' => 'required',
+            'keterangan' => 'nullable'
         ]);
-        Jurusan::create($request->all());
-        return redirect('admin/jurusan')->with('status','Data berhasil ditambahkan');
+        Jurusan::create($validate);
+        return redirect('admin/jurusan')->with('success','Data berhasil ditambahkan');
     }
 
     /**
@@ -69,7 +66,7 @@ class JurusanController extends Controller
      */
     public function edit(Jurusan $jurusan)
     {
-        return view('layouts/admin/jurusan.edit', compact('jurusan'));
+        return view('admin.jurusan.edit', compact('jurusan'));
     }
 
     /**
@@ -81,14 +78,13 @@ class JurusanController extends Controller
      */
     public function update(Request $request, Jurusan $jurusan)
     {
-        Gelombang::where('id', $jurusan->id)
-                ->update([
-                    'kode_jurusan' => $request->kode_jurusan,
-                    'jurusan' => $request->jurusan,
-                    'gambar' => $request->gambar,
-                    'keterangan' => $request->keterangan
-                ]);
-                return redirect('admin/gelombang')->with('status','Data berhasil diubah');
+        $jurusan->update([
+            'kode_jurusan' => $request->kode_jurusan,
+            'jurusan' => $request->jurusan,
+            'gambar' => $request->gambar,
+            'keterangan' => $request->keterangan
+        ]);
+        return redirect('admin/jurusan')->with('success','Data berhasil diubah');
     }
 
     /**
@@ -99,7 +95,7 @@ class JurusanController extends Controller
      */
     public function destroy(Jurusan $jurusan)
     {
-        Jurusan::destroy($jurusan->id);
-        return redirect('admin/jurusan')->with('status','Data berhasil dihapus');
+        $jurusan->delete();
+        return redirect('admin/jurusan')->with('success','Data berhasil dihapus');
     }
 }

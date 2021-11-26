@@ -2,15 +2,7 @@
     <div class="menu_section">
         <h3>General</h3>
         <ul class="nav side-menu">
-            <li><a href="/home_admin"><i class="fa fa-home"></i> Home</a> </li>
-            {{-- <li>
-                <a><i class="fa fa-user"></i> Calon Siswa <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a href="/admin/register">Data Calon Siswa</a></li>
-                    <li><a href="/admin/calon_siswa">Data Orang tua</a></li>
-                    <li><a href="/admin/siswa">Data File</a></li>
-                </ul>
-            </li> --}}
+            <li class="{{ request()->is('admin/index')?'active':'' }}"><a href="{{ url('admin/index') }}"><i class="fa fa-home"></i> Home</a> </li>
             <li>
                 <a><i class="fa fa-user"></i> Data Peserta/Siswa <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
@@ -29,6 +21,7 @@
             <li>
                 <a><i class="fa fa-gear"></i> Settings <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
+                    <li><a href="/admin/user">User</a></li>
                     <li><a href="/admin/tahun_ajaran">Tahun Ajaran</a></li>
                     <li><a href="/admin/jurusan">Jurusan</a></li>
                     <li><a href="/admin/gelombang">Gelombang</a></li>

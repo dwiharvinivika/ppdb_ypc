@@ -40,9 +40,8 @@ class Register extends Model
     {
         if(!is_null($this->peserta)) return $this->peserta->no_peserta;
         // Mendapatkan tahun ajaranya
-        $tahun_ajar = $this->tahun_ajaran->tahun_ajaran;
-        $tahun_ajar = explode('/', $tahun_ajar);
-        $tahun_ajar = substr($tahun_ajar[0], 2, 2).substr($tahun_ajar[1], 2, 2);
+        $tahun_ajar = $this->tahun_ajaran;
+        $tahun_ajar = substr($tahun_ajar->tahun_ajaran_awal, 2, 2).substr($tahun_ajar->tahun_ajaran_akhir, 2, 2);
 
         $last_peserta = Peserta::latest()->first();
         if(is_null($last_peserta)){

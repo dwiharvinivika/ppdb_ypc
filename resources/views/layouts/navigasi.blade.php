@@ -9,36 +9,36 @@
       <div class="navigation">
         <nav>
           <ul class="nav topnav">
-            <li class="dropdown active">
-              <a href="/home"><i class="icon-home"></i> Home <i class="icon-angle-down"></i></a>
-            </li>            
-            <li>
+            <li class="{{ request()->is('/')?'active':'' }}">
+              <a href="/"><i class="icon-home"></i> Home </i></a>
+            </li>
+            <li class="{{ request()->is('prosedur')?'active':'' }}">
               <a href="/prosedur">Prosedur </a>
             </li>
-            <li>
+            <li class="{{ request()->is('jadwal')?'active':'' }}">
               <a href="/jadwal">Jadwal </a>
             </li>
-            <li class="dropdown">
-              <a href="#">Informasi<i class="icon-angle-down"></i></a>
+            <li class="dropdown {{ request()->is(['jurusan','kerjasama','cek_hasil','hasil','contact'])?'active':'' }}">
+              <a href="#">Informasi <i class="icon-angle-down"></i></a>
               <ul class="dropdown-menu">
-                <li><a href="/jurusan">Jurusan</a></li>
-                <li><a href="/kerjasama">Kerjasama Perusahaan</a></li>
-                <li><a href="/cek_hasil">Hasil Seleksi</a></li>
-                <li><a href="/contact">Contact</a></li>
+                <li class="{{ request()->is('jurusan')?'active':'' }}"><a href="/jurusan">Jurusan</a></li>
+                <li class="{{ request()->is('kerjasama')?'active':'' }}"><a href="/kerjasama">Kerjasama Perusahaan</a></li>
+                <li class="{{ request()->is(['cek_hasil','hasil'])?'active':'' }}"><a href="/cek_hasil">Hasil Seleksi</a></li>
+                <li class="{{ request()->is('contact')?'active':'' }}"><a href="/contact">Contact</a></li>
               </ul>
             </li>
-            <li class="dropdown">
-              <a href="#">Gallery<i class="icon-angle-down"></i></a>
+            <li class="dropdown {{ request()->is(['kegiatan', 'fasilitas'])?'active':'' }}">
+              <a href="#">Gallery <i class="icon-angle-down"></i></a>
               <ul class="dropdown-menu">
-                <li><a href="/kegiatan">Kegiatan</a></li>
-                <li><a href="/fasilitas">Fasilitas</a></li>
+                <li class="{{ request()->is('kegiatan')?'active':'' }}"><a href="/kegiatan">Kegiatan</a></li>
+                <li class="{{ request()->is('fasilitas')?'active':'' }}"><a href="/fasilitas">Fasilitas</a></li>
               </ul>
             </li>
             <li class="dropdown">
               <a href="#">Login <i class="icon-angle-down"></i></a>
               <ul class="dropdown-menu">
                 <li><a href="/login_siswa">Siswa Baru</a></li>
-                <li><a href="/admin/login_admin">Admin</a></li>
+                <li><a href="/login_admin">Admin</a></li>
               </ul>
             </li>
           </ul>

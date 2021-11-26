@@ -46,9 +46,10 @@
                     <td>{{ $pst->jk }}</td>
                     <td>{{ $pst->sekolah }}</td>
                     <td>
-                        <select name="program" data-id="{{ $pst->peserta->id }}" class="form-control program">
+                        <select name="jurusan_id" data-id="{{ $pst->peserta->id }}" class="form-control program">
+                            <option value="">--PILIH--</option>
                             @foreach ($jurusan as $j)
-                                <option value="{{ $j }}" {{ $pst->peserta->program==$j?'selected':'' }}>{{ $j }}</option>
+                                <option value="{{ $j->id }}" {{ $pst->peserta->jurusan_id==$j->id?'selected':'' }}>{{ $j->kode_jurusan }}</option>
                             @endforeach
                         </select>
                     </td>
@@ -90,14 +91,14 @@
             })
         });
         $('.program').on('change', function(e) {
-            let program = $(this).val();
+            let jurusan_id = $(this).val();
             let id = $(this).data('id');
             $.ajax({
                 url: '/admin/siswa/'+id,
                 method: 'post',
                 data: {
                     _token: $('input[name=_token]').val(),
-                    program
+                    jurusan_id
                 },
                 success: function(title){
                     Toast.fire({

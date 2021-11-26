@@ -14,7 +14,7 @@ class EditToRegisterTable extends Migration
     public function up()
     {
         Schema::table('register', function (Blueprint $table) {
-            $table->dropColumn('gel');
+            $table->dropColumn(['gel','nokipksp']);
             $table->unsignedBigInteger('gelombang_id')->after('id');
         });
     }
@@ -29,6 +29,7 @@ class EditToRegisterTable extends Migration
         Schema::table('register', function (Blueprint $table) {
             $table->dropColumn('gelombang_id');
             $table->string('gel');
+            $table->smallInteger('nokipksp')->after('kipksp');
         });
     }
 }

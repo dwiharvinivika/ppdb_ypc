@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProsedurTable extends Migration
+class CreateSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateProsedurTable extends Migration
      */
     public function up()
     {
-        Schema::create('prosedur', function (Blueprint $table) {
+        Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('prosedur',100);
-            $table->string('gambar');
+            $table->string('key', 100)->unique();
+            $table->text('value');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateProsedurTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prosedur');
+        Schema::dropIfExists('settings');
     }
 }

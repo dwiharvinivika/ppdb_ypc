@@ -15,8 +15,7 @@ class Tahun_AjaranController extends Controller
     public function index()
     {
         $tahun_ajaran = Tahun_Ajaran::all();
-        return view('admin/tahun_ajaran.tahun_ajaran', compact('tahun_ajaran'));
-
+        return view('admin.tahun_ajaran.index', compact('tahun_ajaran'));
     }
 
     /**
@@ -26,7 +25,7 @@ class Tahun_AjaranController extends Controller
      */
     public function create()
     {
-        return view('layouts/admin/tahun_ajaran.create');
+        return view('admin.tahun_ajaran.create');
     }
 
     /**
@@ -38,7 +37,8 @@ class Tahun_AjaranController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'tahun_ajaran' => 'required',
+            'tahun_ajaran_awal' => 'required',
+            'tahun_ajaran_akhir' => 'required',
             'status' => 'required'
         ]);
         Tahun_Ajaran::create($validate);
@@ -48,10 +48,10 @@ class Tahun_AjaranController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Tahun_Ajaran  $tahun_Ajaran
+     * @param  \App\Tahun_Ajaran  $tahun_ajaran
      * @return \Illuminate\Http\Response
      */
-    public function show(Tahun_Ajaran $tahun_Ajaran)
+    public function show(Tahun_Ajaran $tahun_ajaran)
     {
         //
     }
@@ -59,34 +59,41 @@ class Tahun_AjaranController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Tahun_Ajaran  $tahun_Ajaran
+     * @param  \App\Tahun_Ajaran  $tahun_ajaran
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tahun_Ajaran $tahun_Ajaran)
+    public function edit(Tahun_Ajaran $tahun_ajaran)
     {
-        //
+        return view('admin.tahun_ajaran.edit', compact('tahun_ajaran'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Tahun_Ajaran  $tahun_Ajaran
+     * @param  \App\Tahun_Ajaran  $tahun_ajaran
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tahun_Ajaran $tahun_Ajaran)
+    public function update(Request $request, Tahun_Ajaran $tahun_ajaran)
     {
-        //
+        $validate = $request->validate([
+            'tahun_ajaran_awal' => 'required',
+            'tahun_ajaran_akhir' => 'required',
+            'status' => 'required'
+        ]);
+        $tahun_ajaran->update($validate);
+        return redirect('admin/tahun_ajaran')->with('success', 'Tahun Ajaran berhasil diubah');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Tahun_Ajaran  $tahun_Ajaran
+     * @param  \App\Tahun_Ajaran  $tahun_ajaran
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tahun_Ajaran $tahun_Ajaran)
+    public function destroy(Tahun_Ajaran $tahun_ajaran)
     {
-        //
+        $tahun_ajaran->delete();
+        return back()->with('success', 'Tahun Ajaran Berhasil dihapus');
     }
 }

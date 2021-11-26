@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Gelombang;
+use App\Models\Peserta;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::view('/', 'home');
 
-Route::view('home','home');
 //Route::view('pendaftaran','pendaftaran');
 Route::view('fasilitas','fasilitas');
 Route::view('kegiatan','kegiatan');
@@ -28,7 +27,17 @@ Route::get('prosedur','ProsedurController@index');
 Route::get('jurusan','JurusanController@index');
 //Route::view('jurusan','JurusanController@index');
 Route::view('cek_hasil','cek_hasil');
-Route::view('hasil','hasil');
+Route::get('hasil', function(Request $request){
+    $peserta = Peserta::whereHas('register', function($q)use($request){
+        $q->where('nisn', $request->nisn)->where('daftar_ulang', 1);
+    })->first();
+    if(is_null($peserta)){
+        $hasilText = 'Maaf sekali, anda belum bisa diterima sebagai siswa disekolah ini. Jangan putus asa, tetap semangat :)';
+    }else{
+        $hasilText = "Selamat, Anda (<b>{$peserta->register->nama}</b>) diterima di SMK YPC Tasikmalaya, dengan jurusan <b>{$peserta->program->kode_jurusan} ({$peserta->program->jurusan})</b>";
+    }
+    return view('hasil', compact('hasilText'));
+});
 //Route::view('jadwal','jadwal');
 Route::get('jadwal','GelombangController@index');
 Route::view('contact','contact');
@@ -44,34 +53,28 @@ Route::get('/testimoni','TestimoniController@index');
 Route::get('/testimoni/create','TestimoniController@create');
 Route::post('/testimoni','TestimoniController@store');
 
-Route::group(['prefix'=>'admin/'], function(){
-    //Route::view('kerjasama','kerjasama');
-    Route::view('login_admin','admin/login_admin');
-    Route::view('login_admin','admin/login_admin');
-    Route::view('index','admin/dashboard');
+// Authentication
+Route::view('login_admin','auth.login_admin')->name('login');
+Route::post('login_admin', 'LoginController@login_admin')->name('login.post');
+Route::get('logout', 'LoginController@logout');
+
+Route::group(['prefix'=>'admin/', 'middleware'=>'auth'], function(){
+    Route::view('index','admin.dashboard');
+
+    Route::resource('user', UserController::class);
 
     Route::get('calon_siswa', 'PesertaController@index');
     Route::get('siswa', 'PesertaController@siswa');
     Route::post('siswa/{peserta}', 'PesertaController@update');
 
-    Route::resource('biodata','BiodataController');
+    Route::resource('biodata', BiodataController::class);
 
     //prosedur
-    Route::get('prosedur','ProsedurController@index');
-    Route::get('prosedur/create','ProsedurController@create');
-    Route::post('prosedur','ProsedurController@store');
-    Route::delete('prosedur/{prosedur}','ProsedurController@destroy');
-    Route::get('prosedur/{prosedur}/edit','ProsedurController@edit');
-    Route::patch('prosedur/{prosedur}','ProsedurController@update');
+    Route::view('prosedur', 'admin.prosedur');
+    Route::post('prosedur', 'SettingController@prosedur');
 
     //jurusan
     Route::resource('jurusan', JurusanController::class);
-    Route::get('jurusan','JurusanController@index');
-    Route::get('jurusan/create','JurusanController@create');
-    Route::post('jurusan','JurusanController@store');
-    Route::delete('jurusan/{jurusan}','JurusanController@destroy');
-    Route::get('jurusan/{jurusan}/edit','JurusanController@edit');
-    Route::patch('jurusan/{jurusan}','JurusanController@update');
 
     //gelombang
     Route::resource('gelombang', GelombangController::class);
@@ -104,11 +107,7 @@ Route::group(['prefix'=>'admin/'], function(){
     Route::patch('kegiatan/{kegiatan}','KegiatanController@update');
 
     //Tahun Ajaran
-    Route::get('tahun_ajaran','Tahun_AjaranController@index');
-    Route::get('tahun_ajaran/create','Tahun_AjaranController@create');
-    Route::post('tahun_ajaran','Tahun_AjaranController@store');
-    Route::delete('tahun_ajaran/{tahun_ajaran}','Tahun_AjaranController@destroy');
-    Route::get('tahun_ajaran/{tahun_ajaran}/edit','Tahun_AjaranController@edit');
+    Route::resource('tahun_ajaran', Tahun_AjaranController::class);
 });
 
 Route::get('register', function(){
@@ -116,5 +115,5 @@ Route::get('register', function(){
     $date = date('Y-m-d');
     $gelombang = Gelombang::where('pendaftaran_awal', '<=', $date)
                             ->where('pendaftaran_akhir', '>=', $date)->first();
-    return view('register.create', compact('gelombang', 'action'));
+    return view('register', compact('gelombang', 'action'));
 });

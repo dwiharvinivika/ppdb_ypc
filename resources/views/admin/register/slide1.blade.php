@@ -1,19 +1,4 @@
-    <label class="col-form-label col-md-2 col-sm-2 label-align">Jurusan Pilihan 1</label>
-    <div class="col-md-4 col-sm-4 form-group has-feedback">
-        <select name="jur1" class="form-control">
-            @foreach (['RPL', 'TKJ', 'MM', 'DPIB'] as $item)
-                <option value="{{ $item }}" {{ old('jur1', $register->jur1??'')==$item?'selected':'' }}>{{ $item }}</option>
-            @endforeach
-        </select>
-    </div>
-    <label class="col-form-label col-md-2 col-sm-2 label-align">Jurusan Pilihan 2</label>
-    <div class="col-md-4 col-sm-4  form-group has-feedback">
-        <select name="jur2" class="form-control">
-            @foreach (['TKRO', 'TBSM', 'TEKLIN'] as $item)
-                <option value="{{ $item }}" {{ old('jur1', $register->jur1??'')==$item?'selected':'' }}>{{ $item }}</option>
-            @endforeach
-        </select>
-    </div>
+    @livewire('register-form-jurusan', ['register' => $register??null])
     <label class="col-form-label col-md-2 col-sm-2 label-align">NISN</label>
     <div class="col-md-4 col-sm-4  form-group has-feedback">
         <input type="text" name="nisn" maxlength="15" value="{{ old('nisn', $register->nisn??'') }}" class="form-control" id="inputSuccess2" required>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jurusan;
 use App\Models\Peserta;
 use App\Models\Register;
 use Illuminate\Http\Request;
@@ -73,7 +74,7 @@ class PesertaController extends Controller
     {
         $validate = $request->validate([
             'daftar_ulang' => 'sometimes|boolean',
-            'program' => 'sometimes|string'
+            'jurusan_id' => 'sometimes|integer'
         ]);
         $peserta->update($validate);
         $title = $request->has('daftar_ulang')?'Daftar Ulang berhasil diubah':'Program berhasil dipilih';
@@ -93,7 +94,7 @@ class PesertaController extends Controller
 
     public function siswa()
     {
-        $jurusan = ["RPL", 'TKJ', 'MM', 'TKRO', 'TBSM', 'TEKLIN', 'DPIB'];
+        $jurusan = Jurusan::all();
         $peserta = Register::whereHas('peserta')->get();
         return view('admin.siswa', compact('peserta', 'jurusan'));
     }

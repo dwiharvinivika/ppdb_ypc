@@ -9,6 +9,8 @@
     <link href="{{asset('backend') }}/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="{{asset('backend') }}/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="{{asset('backend') }}/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- bootstrap-progressbar -->
     <link href="{{asset('backend') }}/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
     <!-- bootstrap-daterangepicker -->
@@ -30,6 +32,7 @@
         }
         .container{ margin-top: 15px; }
     </style>
+    @livewireStyles
 </head>
 <body>
     <div class="container">
@@ -115,5 +118,6 @@
         </script>
     @endif
     <script src="{{asset('backend') }}/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
+    @livewireScripts
 </body>
 </html>

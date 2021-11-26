@@ -7,17 +7,15 @@
   <div class="container">
     <div class="row">
       <div class="span6">
-        <div class="video-container">
-          <iframe src="http://player.vimeo.com/video/30585464?title=0&amp;byline=0">			</iframe>
-        </div>
+        <img src="img/slides/camera/slide2/iMac.png" alt="" />
       </div>
       <div class="span6">
         <h5>Masukan <span class="coloblue"><strong>NISN</span></strong></h5>
         <p class="animated fadeInUp"> Silakan masukan NISN Anda pada saat pendaftaran untuk melihat hasil seleksi penerimaan peserta didik baru SMK YPC Tasikmalaya</p>
-        <form>
+        <form action="hasil" method="GET">
           <div class="input-append">
-            <input class="span3 input-large" type="text">
-            <a href="/hasil" class="btn btn-theme btn-large" type="submit">Cek</a>
+            <input class="span3 input-large" name="nisn" type="text">
+            <button class="btn btn-theme btn-large" type="submit">Cek</button>
           </div>
         </form>
       </div>

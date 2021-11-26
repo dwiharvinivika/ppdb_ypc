@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddToRegisterTable extends Migration
+class AddRoleToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class AddToRegisterTable extends Migration
      */
     public function up()
     {
-        Schema::table('register', function (Blueprint $table) {
-            $table->dropColumn('nokipksp');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('role', 20)->after('remember_token');
         });
     }
-    
+
     /**
      * Reverse the migrations.
      *
@@ -25,8 +25,8 @@ class AddToRegisterTable extends Migration
      */
     public function down()
     {
-        Schema::table('register', function (Blueprint $table) {
-            $table->smallInteger('nokipksp')->after('kipksp');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('role');
         });
     }
 }

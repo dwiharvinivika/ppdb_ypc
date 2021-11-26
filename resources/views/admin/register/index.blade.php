@@ -5,7 +5,6 @@
         <div class="x_title">
             <h2>Data <small>Register</small></h2>
             <ul class="nav navbar-right panel_toolbox">
-                <li><a href="{{ route('register.create') }}"><span class="pr-2">Tambah Data</span> <i class="fa fa-plus"></i></a> </li>
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a> </li>
                 <li><a class="close-link"><i class="fa fa-close"></i></a> </li>
             </ul>
@@ -18,15 +17,18 @@
                         <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th><center>No.</center></th>
-                                    <th><center>NISN</center></th>
-                                    <th><center>Nama Peserta</center></th>
-                                    <th><center>Tempat Tanggal Lahir</center></th>
-                                    <th><center>JK</center></th>
-                                    <th><center>Asal Sekolah</center></th>
-                                    <th><center>Alamat Siswa</center></th>
-                                    <th><center>Data Orang Tua</center></th>
-                                    <th><center>Opsi</center></th>
+                                    <td colspan="9"><a href="{{ route('register.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah Data</a></td>
+                                </tr>
+                                <tr>
+                                    <th>No</th>
+                                    <th>NISN</th>
+                                    <th>Nama Peserta</th>
+                                    <th>Tempat Tanggal Lahir</th>
+                                    <th>JK</th>
+                                    <th>Asal Sekolah</th>
+                                    <th>Alamat Siswa</th>
+                                    <th>Data Orang Tua</th>
+                                    <th>Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>

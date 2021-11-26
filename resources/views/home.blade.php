@@ -1,11 +1,9 @@
 @extends('layouts.master')
+
 @section('content')
-<section id="featured">
-
+    <section id="featured">
       <!-- slideshow start here -->
-
       <div class="camera_wrap" id="camera-slide">
-
         <!-- slide 1 here -->
         <div data-src="img/slides/camera/slide1/img1.jpg">
           <div class="camera_caption fadeFromLeft">
@@ -15,12 +13,11 @@
                   <h2 class="animated fadeInDown"><strong>Penerimaan Peserta Didik Baru <span class="colored"></strong></h2>
                   <p class="animated fadeInUp"> Untuk calon pendaftar masuk SMK YPC Tasikmalaya tahun ajaran 2021/2022 bisa mendaftar lewat website ini atau langsung datang ke kampus SMK YPC Tasikmalaya</p>
                   <a href="/register" class="btn btn-success btn-large animated fadeInUp">
-											<i class="icon-link"></i> Daftar Sekarang
-										</a>
-                    <a href="/register" class="btn btn-info btn-large animated fadeInUp">
-											<i class="icon-download"></i> Download Brosur
-										</a>
-                 
+                    <i class="icon-link"></i> Daftar Sekarang
+                  </a>
+                  <a href="/register" class="btn btn-info btn-large animated fadeInUp">
+                    <i class="icon-download"></i> Download Brosur
+                  </a>
                 </div>
                 <div class="span6">
                   <img src="img/slides/camera/slide1/screen.png" alt="" class="animated bounceInDown delay1" />
@@ -41,14 +38,13 @@
                 <div class="span6">
                   <h2 class="animated fadeInDown"><strong>Masukan <span class="colored">NISN</span></strong></h2>
                   <p class="animated fadeInUp"> Masukan NISN Anda untuk melihat hasil seleksi PPDB</p>
-                  <form>
+                  <form action="hasil" method="GET">
                     <div class="input-append">
-                      <input class="span3 input-large" type="text">
-                      <a href="/hasil" class="btn btn-theme btn-large" type="submit">Cek</a>
+                      <input class="span3 input-large" name="nisn" type="text">
+                      <button class="btn btn-theme btn-large" type="submit">Cek</button>
                     </div>
                   </form>
                 </div>
-
               </div>
             </div>
           </div>
@@ -70,8 +66,6 @@
         </div>
 
       </div>
-
       <!-- slideshow end here -->
-
     </section>
 @endsection

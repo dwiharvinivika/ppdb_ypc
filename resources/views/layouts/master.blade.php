@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>@yield('title')PPDB SMK YPC Tasikmalaya</title>
+  <title>@yield('title') PPDB SMK YPC Tasikmalaya</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Your page description here" />
   <meta name="author" content="" />
@@ -28,12 +28,6 @@
   <link rel="apple-touch-icon-precomposed" href="{{ asset('ico/apple-touch-icon-57-precomposed.png') }}" />
   <link rel="shortcut icon" href="{{ asset('ico/favicon.png') }}" />
   @stack('css')
-  <!-- =======================================================
-    Theme Name: Eterna
-    Theme URL: https://bootstrapmade.com/eterna-free-multipurpose-bootstrap-template/
-    Author: BootstrapMade.com
-    Author URL: https://bootstrapmade.com
-  ======================================================= -->
 </head>
 
 <body>
@@ -77,127 +71,34 @@
     <section id="content">
       <div class="container">
         <div class="row">
-          <div class="span12">
-            <div class="row">
+            @php
+                $animation = 'flyLeft';
+            @endphp
+            @foreach (App\Models\Jurusan::all() as $jurusan)
               <div class="span4">
-                <div class="box flyLeft">
+                <div class="box {{ $animation }}">
+                  @php
+                    if($loop->iteration%3==0){
+                        $animation=$animation=='flyLeft'?'flyRight':'flyLeft';
+                    }
+                  @endphp
                   <div class="icon">
-                    <i class="ico icon-circled icon-bgdark icon-star active icon-3x"></i>
+                    <i class="ico icon-circled icon-bgdark icon-{{ $jurusan->gambar }} active icon-3x"></i>
                   </div>
                   <div class="text">
-                    <h5>Teknik <strong>Kendaraan Ringan Otomotif</strong></h5>
-                    <p>
-                      Lorem ipsum dolor sit amet, has ei ipsum scaevola deseruisse am sea facilisis.
-                    </p>
+                    <h5>{!! $jurusan->jurusan !!}</h5>
+                    <p>{{ $jurusan->keterangan }}</p>
                     <a href="#">Learn More</a>
                   </div>
                 </div>
               </div>
 
-              <div class="span4">
-                <div class="box flyLeft">
-                  <div class="icon">
-                    <i class="ico icon-circled icon-bgdark icon-wrench active icon-3x"></i>
-                  </div>
-                  <div class="text">
-                  <h5>Teknik <strong>dan Bisnis Sepeda Motor</strong></h5>
-                    <p>
-                      Lorem ipsum dolor sit amet, has ei ipsum scaevola deseruisse am sea facilisis.
-                    </p>
-                    <a href="#">Learn More</a>
-                  </div>
-                </div>
-              </div>
-              <div class="span4">
-                <div class="box flyRight">
-                  <div class="icon">
-                    <i class="ico icon-circled icon-bgdark icon-laptop active icon-3x"></i>
-                  </div>
-                  <div class="text">
-                  <h5>Teknik <strong>Elektronika Industri</strong></h5>
-                    <p>
-                      Lorem ipsum dolor sit amet, has ei ipsum scaevola deseruisse am sea facilisis.
-                    </p>
-                    <a href="#">Learn More</a>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="span12">
+              @if ($loop->iteration % 3 == 0)
+              <div class="span12" style="margin-top: 20px; margin-bottom: 20px;">
                 <div class="solidline"></div>
-               </div>
               </div>
-              <div class="span4">
-                <div class="box flyRight">
-                  <div class="icon">
-                    <i class="ico icon-circled icon-bgdark icon-laptop active icon-3x"></i>
-                  </div>
-                  <div class="text">
-                  <h5>Teknik <strong>Komputer dan Jaringan</strong></h5>
-                    <p>
-                      Lorem ipsum dolor sit amet, has ei ipsum scaevola deseruisse am sea facilisis.
-                    </p>
-                    <a href="#">Learn More</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="span4">
-                <div class="box flyRight">
-                  <div class="icon">
-                    <i class="ico icon-circled icon-bgdark icon-laptop active icon-3x"></i>
-                  </div>
-                  <div class="text">
-                  <h5>Rekayasa <strong>Perangkat Lunak</strong></h5>
-                    <p>
-                      Lorem ipsum dolor sit amet, has ei ipsum scaevola deseruisse am sea facilisis.
-                    </p>
-                    <a href="#">Learn More</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="span4">
-                <div class="box flyRight">
-                  <div class="icon">
-                    <i class="ico icon-circled icon-bgdark icon-camera active icon-3x"></i>
-                  </div>
-                  <div class="text">
-                  <h5> <strong>Multimedia</strong></h5>
-                    <p>
-                      Lorem ipsum dolor sit amet, has ei ipsum scaevola deseruisse am sea facilisis.
-                    </p>
-                    <a href="#">Learn More</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="span12">
-            <div class="solidline"></div>
-          </div>
-        </div>
-        <div class="span4">
-          <div class="box flyRight">
-            <div class="icon">
-              <i class="ico icon-circled icon-bgdark icon-laptop active icon-3x"></i>
-            </div>
-            <div class="text">
-            <h5>Desain <strong>Pemodelan dan Informasi Gambar Bangunan</strong></h5>
-              <p>
-                Lorem ipsum dolor sit amet, has ei ipsum scaevola deseruisse am sea facilisis.
-              </p>
-              <a href="#">Learn More</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="span12">
-            <div class="solidline"></div>
-          </div>
+              @endif
+            @endforeach
         </div>
         @include('testi_alumni');
       </div>

@@ -24,7 +24,7 @@
 						<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Tahun Ajar </label>
 						<div class="col-md-6 col-sm-6 ">
 							<select name="tahun_ajaran_id" id="tahun_ajaran_id" class="form-control">
-								@foreach (App\Tahun_Ajaran::all() as $thn)
+								@foreach (App\Models\Tahun_Ajaran::all() as $thn)
 									<option value="{{ $thn->id }}">{{ $thn->tahun_ajaran }}</option>
 								@endforeach
 							</select>
@@ -38,7 +38,7 @@
 								for="first-name">Gelombang
 							</label>
 							<div class="col-md-6 col-sm-6 ">
-								<input type="number" name="gelombang" id="first-name"
+								<input type="number" min="0" name="gelombang" id="first-name"
 									class="form-control @error('gelombang') is-invalid @enderror" value="{{ old('gelombang') }}">
 									@error('gelombang')<div class="invalid-feedback"> {{ $message }}</div> @enderror
 							</div>
@@ -63,24 +63,23 @@
 								for="last-name">Pengumuman
 							</label>
 							<div class="col-md-6 col-sm-6 ">
-								<input type="text" name="pengumuman" id="last-name" name="last-name"
+								<input type="date" name="pengumuman" id="last-name" name="last-name"
 									class="form-control @error('pengumuman') is-invalid @enderror" value="{{ old('pengumuman') }}">
 									@error('pengumuman')<div class="invalid-feedback"> {{ $message }}</div> @enderror
 							</div>
 						</div>
 						<div class="item form-group">
-							<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Daftar Ulang</label>
+							<label for="daftar_ulang" class="col-form-label col-md-3 col-sm-3 label-align">Daftar Ulang</label>
 							<div class="col-md-6 col-sm-6 ">
-								<input id="middle-name" name="daftar_ulang" class="form-control @error('daftar_ulang') is-invalid @enderror" type="text"
-									name="middle-name" value="{{ old('daftar_ulang') }}">
-									@error('daftar_ulang')<div class="invalid-feedback"> {{ $message }}</div> @enderror
+								<input id="daftar_ulang" name="daftar_ulang" class="form-control @error('daftar_ulang') is-invalid @enderror" type="date" value="{{ old('daftar_ulang') }}">
+                                @error('daftar_ulang')<div class="invalid-feedback"> {{ $message }}</div> @enderror
 							</div>
 						</div>
 						<div class="ln_solid"></div>
 						<div class="item form-group">
 							<div class="col-md-6 col-sm-6 offset-md-3">
 								<button class="btn btn-primary" type="reset">Batal</button>
-								<button type="submit" class="btn btn-success">Simpan</button>
+								<button class="btn btn-success">Simpan</button>
 							</div>
 						</div>
 					</form>

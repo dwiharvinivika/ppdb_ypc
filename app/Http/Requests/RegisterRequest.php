@@ -24,7 +24,7 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'nisn'=>'required|max:30',
+            'nisn'=>'required|max:12',
             'nik'=>'required',
             'nama'=>'required',
             'tmp_lhr'=>'required|max:20',
@@ -35,8 +35,8 @@ class RegisterRequest extends FormRequest
             'tb'=>'required',
             'lulus_thn'=>'required',
             'hp_siswa'=>'required',
-            'jur1'=>'required',
-            'jur2'=>'required',
+            'jur1_id'=>'required',
+            'jur2_id'=>'required',
             'peringkat'=>'required',
             'tgl_reg'=>'required',
             // 'gel'=>'required',

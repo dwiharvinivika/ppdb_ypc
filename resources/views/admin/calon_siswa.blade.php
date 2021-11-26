@@ -23,17 +23,17 @@
                     <div class="card-box table-responsive">
                         <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
                             <thead>
-                                <tr>
-                                <th><center>No.</center></th>
-                                <th><center>NISN</center></th>
-                                <th><center>Nama Peserta</center></th>
-                                <th><center>Tempat Tanggal Lahir</center></th>
-                                <th><center>JK</center></th>
-                                <th><center>Asal Sekolah</center></th>
-                                <th><center>Alamat Siswa</center></th>
-                                <th><center>Data Orang Tua</center></th>
-                                <th><center>Opsi</center></th>
-                                </tr>
+                              <tr>
+                                <th>No</th>
+                                <th>NISN</th>
+                                <th>Nama Peserta</th>
+                                <th>Tempat Tanggal Lahir</th>
+                                <th>JK</th>
+                                <th>Asal Sekolah</th>
+                                <th>Alamat Siswa</th>
+                                <th>Data Orang Tua</th>
+                                <th>Opsi</th>
+                              </tr>
                             </thead>
                             <tbody>
                                 @foreach ($peserta as $pst)
