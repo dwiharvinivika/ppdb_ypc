@@ -27,9 +27,8 @@
                     <li><a href="/admin/gelombang">Gelombang</a></li>
                     <li><a href="/admin/kerjasama">Kerjasama</a></li>
                     <li><a href="/admin/prosedur">Prosedur</a></li>
-                    <li><a href="/admin/kegiatan">Kegiatan</a></li>
                     <li><a href="/admin/slide">Slide</a></li>
-                    <li><a href="/admin/galery">Galery</a></li>
+                    <li><a href="/admin/gallery">Gallery</a></li>
                 </ul>
             </li>
         </ul>

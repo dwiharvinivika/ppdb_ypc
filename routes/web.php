@@ -18,14 +18,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home');
 
-//Route::view('pendaftaran','pendaftaran');
-Route::view('fasilitas','fasilitas');
+// Gallery tampilan user
 Route::view('kegiatan','kegiatan');
+Route::view('fasilitas','fasilitas');
 
-//Route::view('prosedur','prosedur');
-Route::get('prosedur','ProsedurController@index');
+Route::view('prosedur','prosedur');
 Route::get('jurusan','JurusanController@index');
-//Route::view('jurusan','JurusanController@index');
 Route::view('cek_hasil','cek_hasil');
 Route::get('hasil', function(Request $request){
     $peserta = Peserta::whereHas('register', function($q)use($request){
@@ -38,8 +36,8 @@ Route::get('hasil', function(Request $request){
     }
     return view('hasil', compact('hasilText'));
 });
-//Route::view('jadwal','jadwal');
-Route::get('jadwal','GelombangController@index');
+
+Route::view('jadwal','jadwal');
 Route::view('contact','contact');
 
 //pendaftaran_calon_siswa
@@ -69,6 +67,9 @@ Route::group(['prefix'=>'admin/', 'middleware'=>'auth'], function(){
 
     Route::resource('biodata', BiodataController::class);
 
+    //Tahun Ajaran
+    Route::resource('tahun_ajaran', Tahun_AjaranController::class);
+
     //prosedur
     Route::view('prosedur', 'admin.prosedur');
     Route::post('prosedur', 'SettingController@prosedur');
@@ -94,20 +95,7 @@ Route::group(['prefix'=>'admin/', 'middleware'=>'auth'], function(){
     Route::post('slide','SlideController@store');
 
     //Galery
-    Route::get('galery','GaleryController@index');
-    Route::get('galery/create','GaleryController@create');
-    Route::post('galery','GaleryController@store');
-
-    //kegiatan
-    Route::get('kegiatan','KegiatanController@index');
-    Route::get('kegiatan/create','KegiatanController@create');
-    Route::post('kegiatan','KegiatanController@store');
-    Route::delete('kegiatan/{kegiatan}','KegiatanController@destroy');
-    Route::get('kegiatan/{kegiatan}/edit','KegiatanController@edit');
-    Route::patch('kegiatan/{kegiatan}','KegiatanController@update');
-
-    //Tahun Ajaran
-    Route::resource('tahun_ajaran', Tahun_AjaranController::class);
+    Route::resource('gallery',GalleryController::class);
 });
 
 Route::get('register', function(){
