@@ -1,8 +1,8 @@
 /**
  * Resize function without multiple trigger
- * 
+ *
  * Usage:
- * $(window).smartresize(function(){  
+ * $(window).smartresize(function(){
  *     // code here
  * });
  */
@@ -16,8 +16,8 @@
             var obj = this, args = arguments;
             function delayed () {
                 if (!execAsap)
-                    func.apply(obj, args); 
-                timeout = null; 
+                    func.apply(obj, args);
+                timeout = null;
             }
 
             if (timeout)
@@ -25,11 +25,11 @@
             else if (execAsap)
                 func.apply(obj, args);
 
-            timeout = setTimeout(delayed, threshold || 100); 
+            timeout = setTimeout(delayed, threshold || 100);
         };
     };
 
-    // smartresize 
+    // smartresize
     jQuery.fn[sr] = function(fn){  return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr); };
 
 })(jQuery,'smartresize');
@@ -611,7 +611,7 @@ function init_starrr() {
 
 function init_JQVmap() {
 
-    //console.log('check init_JQVmap [' + typeof (VectorCanvas) + '][' + typeof (jQuery.fn.vectorMap) + ']' );	
+    //console.log('check init_JQVmap [' + typeof (VectorCanvas) + '][' + typeof (jQuery.fn.vectorMap) + ']' );
 
     if (typeof (jQuery.fn.vectorMap) === 'undefined') { return; }
 
@@ -1782,9 +1782,9 @@ function init_SmartWizard() {
     $('#wizard').on("stepContent", function(e, anchorObject, stepIndex, stepDirection) {
         console.log(stepIndex);
     });
-    
+
     $('#wizard').smartWizard();
-    
+
     $('#wizard_verticle').smartWizard({
         transitionEffect: 'slide'
     });
@@ -2500,18 +2500,19 @@ function init_DataTables() {
                         extend: "copy",
                         className: "btn-sm"
                     },
+                    // {
+                    //     extend: "csv",
+                    //     className: "btn-sm btn-info"
+                    // },
                     {
-                        extend: "csv",
-                        className: "btn-sm"
+                        extend: "excelHtml5",
+                        className: "btn-sm",
+
                     },
-                    {
-                        extend: "excel",
-                        className: "btn-sm"
-                    },
-                    {
-                        extend: "pdfHtml5",
-                        className: "btn-sm"
-                    },
+                    // {
+                    //     extend: "pdfHtml5",
+                    //     className: "btn-sm"
+                    // },
                     {
                         extend: "print",
                         className: "btn-sm"
@@ -5043,4 +5044,4 @@ $(document).ready(function () {
     init_autosize();
     init_autocomplete();
 
-});	
+});

@@ -22,8 +22,12 @@
       <div class="x_content">
         <div class="row">
           <div class="col-sm-12">
+            <form action="{{ url('admin/siswa/export') }}" method="post">
+                @csrf
+                <button class="btn btn-success ml-3 mb-3">Export Excel</button>
+            </form>
             <div class="card-box table-responsive">
-              <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+              <table id="datatable" class="table table-striped table-bordered">
                 <thead>
                   <tr>
                     <th class="text-center">No.</th>

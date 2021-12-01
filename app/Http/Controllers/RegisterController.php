@@ -17,7 +17,6 @@ class RegisterController extends Controller
     public function index()
     {
         $register = Register::all();
-
         return view('admin.register.index', compact('register'));
     }
 
@@ -32,7 +31,8 @@ class RegisterController extends Controller
         $date = date('Y-m-d');
         $gelombang = Gelombang::where('pendaftaran_awal', '<=', $date)
                                 ->where('pendaftaran_akhir', '>=', $date)->first();
-        return view('admin.register.create', compact('gelombang', 'action'));
+        $view = request()->routeIs('register.create')?'admin.register.create':'register';
+        return view($view, compact('gelombang', 'action'));
     }
 
     /**

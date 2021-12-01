@@ -1,8 +1,5 @@
 <?php
 
-use App\Models\Gelombang;
-use App\Models\Peserta;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,17 +22,7 @@ Route::view('fasilitas','fasilitas');
 Route::view('prosedur','prosedur');
 Route::get('jurusan','JurusanController@index');
 Route::view('cek_hasil','cek_hasil');
-Route::get('hasil', function(Request $request){
-    $peserta = Peserta::whereHas('register', function($q)use($request){
-        $q->where('nisn', $request->nisn)->where('daftar_ulang', 1);
-    })->first();
-    if(is_null($peserta)){
-        $hasilText = 'Maaf sekali, anda belum bisa diterima sebagai siswa disekolah ini. Jangan putus asa, tetap semangat :)';
-    }else{
-        $hasilText = "Selamat, Anda (<b>{$peserta->register->nama}</b>) diterima di SMK YPC Tasikmalaya, dengan jurusan <b>{$peserta->program->kode_jurusan} ({$peserta->program->jurusan})</b>";
-    }
-    return view('hasil', compact('hasilText'));
-});
+Route::get('hasil', 'PesertaController@cek_hasil');
 
 Route::view('jadwal','jadwal');
 Route::view('contact','contact');
@@ -63,6 +50,7 @@ Route::group(['prefix'=>'admin/', 'middleware'=>'auth'], function(){
 
     Route::get('calon_siswa', 'PesertaController@index');
     Route::get('siswa', 'PesertaController@siswa');
+    Route::post('siswa/export', 'PesertaController@siswa_export');
     Route::post('siswa/{peserta}', 'PesertaController@update');
 
     Route::resource('biodata', BiodataController::class);
@@ -98,10 +86,4 @@ Route::group(['prefix'=>'admin/', 'middleware'=>'auth'], function(){
     Route::resource('gallery',GalleryController::class);
 });
 
-Route::get('register', function(){
-    $action = '/admin/register';
-    $date = date('Y-m-d');
-    $gelombang = Gelombang::where('pendaftaran_awal', '<=', $date)
-                            ->where('pendaftaran_akhir', '>=', $date)->first();
-    return view('register', compact('gelombang', 'action'));
-});
+Route::get('register', 'RegisterController@create');

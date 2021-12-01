@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Prosedur;
 use App\Models\Testimoni;
 use Illuminate\Http\Request;
 
@@ -37,12 +36,6 @@ class TestimoniController extends Controller
      */
     public function store(Request $request)
     {
-         $request->validate([
-            'prosedur' => 'required',
-            'gambar' => 'required'
-
-        ]);
-        Prosedur::create($request->all());
         return redirect('admin/prosedur')->with('status','Data berhasil ditambahkan');
     }
 
