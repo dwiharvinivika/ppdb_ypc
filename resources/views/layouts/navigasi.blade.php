@@ -1,7 +1,7 @@
 <div class="row nomargin">
   <div class="span4">
     <div class="logo">
-      <a href="/home"><img src="{{ asset('img/logo.jpg') }}" alt="" /></a>
+      <a href="/home"><img src="{{ $web_setting['logo'] }}" alt="" /></a>
     </div>
   </div>
   <div class="span8">

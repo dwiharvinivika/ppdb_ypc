@@ -96,4 +96,14 @@ class Tahun_AjaranController extends Controller
         $tahun_ajaran->delete();
         return back()->with('success', 'Tahun Ajaran Berhasil dihapus');
     }
+
+    public function set_aktif(Request $request)
+    {
+        foreach(Tahun_Ajaran::get() as $thn){
+            $thn->update(['status'=>'Tidak Aktif']);
+        }
+        $tahun_ajaran = Tahun_Ajaran::find($request->id);
+        $tahun_ajaran->update(['status'=>'Aktif']);
+        return response()->json($tahun_ajaran->tahun_ajaran);
+    }
 }

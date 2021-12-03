@@ -21,10 +21,11 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card-box table-responsive">
-                        <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                        <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                               <tr>
                                 <th>No</th>
+                                <th>No Peserta</th>
                                 <th>NISN</th>
                                 <th>Nama Peserta</th>
                                 <th>Tempat Tanggal Lahir</th>
@@ -39,6 +40,7 @@
                                 @foreach ($peserta as $pst)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $pst->peserta->no_peserta }}</td>
                                     <td>{{ $pst->nisn }}</td>
                                     <td>{{ $pst->nama }}</td>
                                     <td>{{ $pst->ttl }}</td>
@@ -46,7 +48,12 @@
                                     <td>{{ $pst->sekolah }}</td>
                                     <td>{{ $pst->alamat_siswa }}</td>
                                     <td><a href="" class="btn btn-sm btn-success"> Lihat </a></td>
-                                    <td><a href="" class="btn btn-sm btn-warning"> ubah </a><a href="" class="btn btn-sm btn-danger"> Hapus </a></td>
+                                    <td>
+                                        <form action="{{ route('cetak_kartu', $pst) }}" target="_blank" method="post">
+                                            @csrf
+                                            <button class="btn btn-success"><i class="fa fa-file"></i> Cetak</button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

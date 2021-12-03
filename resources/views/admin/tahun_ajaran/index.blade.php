@@ -36,7 +36,10 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{ $tahun_ajaran->tahun_ajaran }}</td>
-                                    <td>{!! $tahun_ajaran->label_status !!}</td>
+                                    {{-- <td>{!! $tahun_ajaran->label_status !!}</td> --}}
+                                    <td>
+                                        <input type="radio" data-off-text="Tidak" data-on-text="Aktif" name="tahun_aktif" id="" {{ $tahun_ajaran->status=='Aktif'?'checked':'' }} value="{{ $tahun_ajaran->id }}">
+                                    </td>
                                     <td>
                                         <a href="tahun_ajaran/{{ $tahun_ajaran->id }}/edit" class="btn btn-sm btn-warning"> Ubah </a>
                                         <form action="tahun_ajaran/{{ $tahun_ajaran->id }}" method="post" class="d-inline">
@@ -56,3 +59,25 @@
     </div>
 </div>
 @endsection
+
+@push('js')
+    <script>
+        $('input[name=tahun_aktif]').bootstrapSwitch()
+        // $('input[name=tahun_aktif]').on('change', function(){
+        $('input[name=tahun_aktif]').on('switchChange.bootstrapSwitch', function(){
+            console.log('Nilainya : '+$(this).val());
+            $.ajax({
+                url: '/api/set-tahun-aktif',
+                data: {id:$(this).val()},
+                method: 'post',
+                success: function(result){
+                    $('#tahun-ajaran').text(result)
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Tahun Ajaran Aktif berhasil diubah'
+                    })
+                }
+            })
+        })
+    </script>
+@endpush

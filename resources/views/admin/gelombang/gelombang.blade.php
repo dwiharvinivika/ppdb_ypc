@@ -20,7 +20,7 @@
                     <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                         <tr>
-                        <td colspan=6><a href="gelombang/create" my='3' class="btn btn-xs btn-primary"><i class="fa fa-plus"></i> Tambah</a></td>
+                        <td colspan=7><a href="gelombang/create" my='3' class="btn btn-xs btn-primary"><i class="fa fa-plus"></i> Tambah</a></td>
                         </tr>
                         @if(session('status'))
                             <div class="alert alert-success">
@@ -29,6 +29,7 @@
                         @endif
                         <tr>
                         <th><center>No.</center></th>
+                        <th><center>Tahun Ajaran</center></th>
                         <th><center>Gelombang</center></th>
                         <th><center>Pendaftaran</center></th>
                         <th><center>Pengumuman</center></th>
@@ -41,6 +42,7 @@
                         @foreach($gelombang as $gelombang)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
+                            <td>{{ $gelombang->tahun_ajaran->tahun_ajaran }}</td>
                             <td>{{ $gelombang->gelombang }}</td>
                             <td>{{ $gelombang->pendaftaran_awal.' / '.$gelombang->pendaftaran_akhir }}</td>
                             <td>{{ $gelombang->pengumuman }}</td>

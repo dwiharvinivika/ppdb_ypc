@@ -22,7 +22,7 @@ class FormAdminGallery extends Component
 
     public function mount()
     {
-        $this->kategori = old('kategori', $this->gallery->kategori??'');
+        $this->kategori = old('kategori', $this->gallery->kategori??'kegiatan');
         $this->tags = old('tags.*', json_decode($this->gallery->tags??'', true));
         $this->listKategori = setting('kategori_tags');
         $this->action = route('gallery.store');

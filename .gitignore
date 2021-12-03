@@ -2,6 +2,9 @@
 /public/hot
 /public/storage
 /public/galleries
+/public/images
+/public/img/logo.*
+/public/img/slides/*
 /storage/*.key
 /vendor
 .env

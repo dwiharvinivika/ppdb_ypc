@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Register extends Model
 {
@@ -70,4 +71,12 @@ class Register extends Model
     {
         return $this->tmp_lhr.', '.$this->tgl_lhr;
     }
+
+    public function jurusan(int $ke)
+    {
+        $jur_id = 'jur'.$ke.'_id';
+        $jurusan = DB::table('jurusan')->select('jurusan')->where('id', $this->$jur_id)->first();
+        return strip_tags($jurusan->jurusan);
+    }
 }
+

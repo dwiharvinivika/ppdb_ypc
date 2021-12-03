@@ -8,6 +8,7 @@ use App\Models\Peserta;
 use App\Models\Register;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class PesertaController extends Controller
 {
@@ -18,7 +19,9 @@ class PesertaController extends Controller
      */
     public function index()
     {
-        $peserta = Register::whereHas('peserta')->get();
+        $peserta = Register::whereHas('peserta')->whereHas('tahun_ajaran', function($q){
+            $q->where('status', 'Aktif');
+        })->get();
         return view('admin.calon_siswa', compact('peserta'));
     }
 
@@ -43,13 +46,21 @@ class PesertaController extends Controller
     public function siswa()
     {
         $jurusan = Jurusan::all();
-        $peserta = Register::whereHas('peserta')->get();
+        $peserta = Register::whereHas('peserta')->whereHas('tahun_ajaran', function($q){
+            $q->where('status', 'Aktif');
+        })->get();
         return view('admin.siswa', compact('peserta', 'jurusan'));
     }
 
     public function siswa_export(Request $request)
     {
         return Excel::download(new SiswaExport, 'siswa-'.date('Y-m-d').'.xlsx');
+    }
+
+    public function cetak(Register $peserta)
+    {
+        $pdf = PDF::loadView('exports.kartu', compact('peserta'));
+        return $pdf->stream('Kartu-Peserta-'.$peserta->nama.'.pdf');
     }
 
     public function cek_hasil(Request $request)

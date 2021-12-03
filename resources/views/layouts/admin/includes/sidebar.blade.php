@@ -15,6 +15,7 @@
             <li><a href="javascript:void(0)"><i class="fa fa-file-text-o"></i> Nilai Raport</a></li>
         </ul>
     </div>
+    @can('admin')
     <div class="menu_section">
         <h3>Frontend</h3>
         <ul class="nav side-menu">
@@ -29,8 +30,10 @@
                     <li><a href="/admin/prosedur">Prosedur</a></li>
                     <li><a href="/admin/slide">Slide</a></li>
                     <li><a href="/admin/gallery">Gallery</a></li>
+                    <li><a href="/admin/web_setting">Web Setting</a></li>
                 </ul>
             </li>
         </ul>
     </div>
+    @endcan
 </div>

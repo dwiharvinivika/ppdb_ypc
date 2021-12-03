@@ -16,7 +16,9 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        $register = Register::all();
+        $register = Register::whereHas('gelombang.tahun_ajaran', function($q){
+            $q->where('status', 'Aktif');
+        })->get();
         return view('admin.register.index', compact('register'));
     }
 
@@ -136,6 +138,15 @@ class RegisterController extends Controller
         $register->orangtua()->delete();
         $register->delete();
         return back()->with('success', 'Data Register berhasil dihapus.');
+    }
+
+    public function jadwal()
+    {
+        $gelombang = Gelombang::whereHas('tahun_ajaran', function($q){
+            // $q->where('tahun_ajaran_awal', '<=', date('Y'))->where('tahun_ajaran_akhir', '>=', date('Y'));
+            $q->where('status', 'Aktif');
+        })->get();
+        return view('jadwal', compact('gelombang'));
     }
 
     public function whatsappNotification(string $recipient)

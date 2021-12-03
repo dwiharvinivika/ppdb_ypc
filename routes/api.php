@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('set-tahun-aktif', 'Tahun_AjaranController@set_aktif');
+Route::post('change-slide', 'SettingController@slide');

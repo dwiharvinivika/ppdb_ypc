@@ -24,7 +24,7 @@ Route::get('jurusan','JurusanController@index');
 Route::view('cek_hasil','cek_hasil');
 Route::get('hasil', 'PesertaController@cek_hasil');
 
-Route::view('jadwal','jadwal');
+Route::get('jadwal', 'RegisterController@jadwal');
 Route::view('contact','contact');
 
 //pendaftaran_calon_siswa
@@ -46,44 +46,50 @@ Route::get('logout', 'LoginController@logout');
 Route::group(['prefix'=>'admin/', 'middleware'=>'auth'], function(){
     Route::view('index','admin.dashboard');
 
-    Route::resource('user', UserController::class);
+    //Register
+    Route::resource('register', RegisterController::class);
 
     Route::get('calon_siswa', 'PesertaController@index');
     Route::get('siswa', 'PesertaController@siswa');
     Route::post('siswa/export', 'PesertaController@siswa_export');
     Route::post('siswa/{peserta}', 'PesertaController@update');
-
-    Route::resource('biodata', BiodataController::class);
-
-    //Tahun Ajaran
-    Route::resource('tahun_ajaran', Tahun_AjaranController::class);
-
-    //prosedur
-    Route::view('prosedur', 'admin.prosedur');
-    Route::post('prosedur', 'SettingController@prosedur');
-
-    //jurusan
-    Route::resource('jurusan', JurusanController::class);
-
-    //gelombang
-    Route::resource('gelombang', GelombangController::class);
-
-    //kerjasama
-    Route::resource('kerjasama', KerjasamaController::class);
-
-    //Register
-    Route::resource('register', RegisterController::class);
+    Route::post('siswa/{peserta}/cetak', 'PesertaController@cetak')->name('cetak_kartu');
 
     //Pembayaran calon siswa
     Route::resource('pembayaran', PembayaranController::class);
 
-    //Slide
-    Route::get('slide','ProsedurController@index');
-    Route::get('slide/create','SlideController@create');
-    Route::post('slide','SlideController@store');
+    Route::middleware('can:admin')->group(function(){
+        Route::resource('user', UserController::class);
 
-    //Galery
-    Route::resource('gallery',GalleryController::class);
+        Route::view('preview', 'exports.kartu');
+
+        //Tahun Ajaran
+        Route::resource('tahun_ajaran', Tahun_AjaranController::class);
+
+        //prosedur
+        Route::view('prosedur', 'admin.prosedur');
+        Route::post('prosedur', 'SettingController@prosedur');
+
+        //jurusan
+        Route::resource('jurusan', JurusanController::class);
+
+        //gelombang
+        Route::resource('gelombang', GelombangController::class);
+
+        //kerjasama
+        Route::resource('kerjasama', KerjasamaController::class);
+
+        //Slide
+        Route::view('slide', 'admin.slide');
+        Route::get('slide/create','SlideController@create');
+        Route::post('slide','SlideController@store');
+
+        //Galery
+        Route::resource('gallery',GalleryController::class);
+
+        Route::get('web_setting', 'SettingController@web_setting');
+        Route::post('web_setting', 'SettingController@post_web_setting');
+    });
 });
 
 Route::get('register', 'RegisterController@create');

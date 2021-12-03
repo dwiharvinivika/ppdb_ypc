@@ -22,15 +22,20 @@
       <div class="x_content">
         <div class="row">
           <div class="col-sm-12">
-            <form action="{{ url('admin/siswa/export') }}" method="post">
-                @csrf
-                <button class="btn btn-success ml-3 mb-3">Export Excel</button>
-            </form>
-            <div class="card-box table-responsive">
+              <div class="card-box table-responsive">
               <table id="datatable" class="table table-striped table-bordered">
                 <thead>
                   <tr>
+                    <th colspan="9">
+                      <form action="{{ url('admin/siswa/export') }}" method="post">
+                        @csrf
+                        <button class="btn btn-sm btn-success">Export Excel</button>
+                      </form>
+                    </th>
+                  </tr>
+                  <tr>
                     <th class="text-center">No.</th>
+                    <th class="text-center">No Peserta</th>
                     <th class="text-center">NISN</th>
                     <th class="text-center">Nama Peserta</th>
                     <th class="text-center">Tempat Tanggal Lahir</th>
@@ -44,6 +49,7 @@
                   @foreach ($peserta as $pst)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
+                    <td>{{ $pst->peserta->no_peserta }}</td>
                     <td>{{ $pst->nisn }}</td>
                     <td>{{ $pst->nama }}</td>
                     <td>{{ $pst->ttl }}</td>

@@ -1,9 +1,12 @@
+@php
+    $web_setting = setting('web_setting');
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
-  <title>@yield('title') PPDB SMK YPC Tasikmalaya</title>
+  <title>@yield('title') {{ $web_setting['website_name'] }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Your page description here" />
   <meta name="author" content="" />
@@ -19,6 +22,12 @@
   <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
 
   <!-- Theme skin -->
+  {{-- <link href="{{ asset('color/default.css') }}" rel="stylesheet" /> --}}
+  <style>
+      :root{
+        --thema: {{ $web_setting['theme_color'] }};
+      }
+  </style>
   <link href="{{ asset('color/default.css') }}" rel="stylesheet" />
 
   <!-- Fav and touch icons -->
@@ -40,7 +49,7 @@
         <div class="container">
           <div class="row">
             <div class="span6">
-              <p class="topcontact"><i class="icon-phone"></i> +62 088 999 123</p>
+              <p class="topcontact"><i class="icon-phone"></i> {{ $web_setting['no_telp'] }}</p>
             </div>
             <div class="span6">
 
@@ -58,7 +67,7 @@
         </div>
       </div>
       <div class="container">
-        @include('layouts.navigasi')
+        @include('layouts.navigasi', compact('web_setting'))
       </div>
     </header>
     <!-- end header -->

@@ -13,4 +13,9 @@ class Gelombang extends Model
     {
         return $this->belongsTo(Tahun_Ajaran::class);
     }
+
+    public function getPendaftaranAttribute()
+    {
+        return $this->pendaftaran_awal.' - '.$this->pendaftaran_akhir;
+    }
 }
