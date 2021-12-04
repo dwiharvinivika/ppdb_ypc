@@ -66,7 +66,7 @@ class RegisterRequest extends FormRequest
             'foto'=>'required|image',
             'ijazah'=>'required|image',
         ];
-        if(request()->routeIs('register.update')){
+        if(request()->routeIs('register.update')||request()->is('user/register/*')){
             unset($rules['foto']);
             unset($rules['ijazah']);
         }

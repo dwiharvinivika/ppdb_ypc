@@ -16,7 +16,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect('admin/index');
+            return redirect()->intended('admin/index');
         }
 
         return back()->withErrors([
@@ -24,9 +24,26 @@ class LoginController extends Controller
         ]);
     }
 
+    public function login_siswa(Request $request)
+    {
+        $credentials = $request->validate([
+            'code' => ['required', 'numeric'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended('user/index');
+        }
+
+        return back()->withErrors([
+            'code' => 'NISN atau password tidak cocok.',
+        ]);
+    }
+
     public function logout()
     {
-        session()->flush();
+        Auth::logout();
         return redirect('');
     }
 }

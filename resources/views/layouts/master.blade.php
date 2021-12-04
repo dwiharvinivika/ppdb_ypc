@@ -142,6 +142,9 @@
   <!-- Template Custom JavaScript File -->
   <script src="{{ asset('js/custom.js') }}"></script>
   <script src="{{ asset('js/app.js') }}"></script>
+  @if (session()->has('success'))
+      <script>Toast.fire({icon:'success',title:'{{ session("success") }}'})</script>
+  @endif
   @stack('js')
 </body>
 </html>

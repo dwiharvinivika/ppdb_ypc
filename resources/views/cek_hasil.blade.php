@@ -7,7 +7,7 @@
   <div class="container">
     <div class="row">
       <div class="span6">
-        <img src="img/slides/camera/slide2/iMac.png" alt="" />
+        <img src="{{ setting('slides')[1]['content'] }}" alt="" />
       </div>
       <div class="span6">
         <h5>Masukan <span class="coloblue"><strong>NISN</span></strong></h5>

@@ -1,7 +1,7 @@
 <div class="row nomargin">
   <div class="span4">
     <div class="logo">
-      <a href="/home"><img src="{{ $web_setting['logo'] }}" alt="" /></a>
+      <a href="/"><img src="{{ $web_setting['logo'] }}" alt="" /></a>
     </div>
   </div>
   <div class="span8">
@@ -21,17 +21,17 @@
             <li class="dropdown {{ request()->is(['jurusan','kerjasama','cek_hasil','hasil','contact'])?'active':'' }}">
               <a href="#">Informasi <i class="icon-angle-down"></i></a>
               <ul class="dropdown-menu">
-                <li class="{{ request()->is('jurusan')?'active':'' }}"><a href="/jurusan">Jurusan</a></li>
+                {{-- <li class="{{ request()->is('jurusan')?'active':'' }}"><a href="/jurusan">Jurusan</a></li> --}}
                 <li class="{{ request()->is('kerjasama')?'active':'' }}"><a href="/kerjasama">Kerjasama Perusahaan</a></li>
                 <li class="{{ request()->is(['cek_hasil','hasil'])?'active':'' }}"><a href="/cek_hasil">Hasil Seleksi</a></li>
                 <li class="{{ request()->is('contact')?'active':'' }}"><a href="/contact">Contact</a></li>
               </ul>
             </li>
-            <li class="dropdown {{ request()->is(['kegiatan', 'fasilitas'])?'active':'' }}">
+            <li class="dropdown {{ request()->is(['gallery/kegiatan', 'gallery/fasilitas'])?'active':'' }}">
               <a href="#">Gallery <i class="icon-angle-down"></i></a>
               <ul class="dropdown-menu">
-                <li class="{{ request()->is('kegiatan')?'active':'' }}"><a href="/kegiatan">Kegiatan</a></li>
-                <li class="{{ request()->is('fasilitas')?'active':'' }}"><a href="/fasilitas">Fasilitas</a></li>
+                <li class="{{ request()->is('gallery/kegiatan')?'active':'' }}"><a href="/gallery/kegiatan">Kegiatan</a></li>
+                <li class="{{ request()->is('gallery/fasilitas')?'active':'' }}"><a href="/gallery/fasilitas">Fasilitas</a></li>
               </ul>
             </li>
             <li class="dropdown">

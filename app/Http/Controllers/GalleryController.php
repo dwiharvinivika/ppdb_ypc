@@ -56,9 +56,11 @@ class GalleryController extends Controller
      * @param  \App\Models\Gallery  $gallery
      * @return \Illuminate\Http\Response
      */
-    public function show(Gallery $gallery)
+    public function show($kategori)
     {
-
+        $tags = setting('kategori_tags')[$kategori];
+        $galleries = Gallery::where('kategori', $kategori)->get();
+        return view('gallery', compact('tags', 'galleries'));
     }
 
     /**

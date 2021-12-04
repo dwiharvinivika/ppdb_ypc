@@ -7,17 +7,17 @@
             <div class="span12">
                 <ul class="portfolio-categ filter">
                     <li class="all active"><a href="#">Semua</a></li>
-                    @foreach (setting('kategori_tags')['kegiatan'] as $kegiatan)
-                        <li class="{{ $kegiatan }}"><a href="#">{{ $kegiatan }}</a></li>
+                    @foreach ($tags as $tag)
+                        <li class="{{ $tag }}"><a href="#">{{ $tag }}</a></li>
                     @endforeach
                 </ul>
                 <div class="clearfix"></div>
                 <div class="row">
                     <section id="projects">
                         <ul id="thumbs" class="grid cs-style-4 portfolio">
-                            @foreach (App\Models\Gallery::where('kategori', 'kegiatan')->get() as $gallery)
+                            @foreach ($galleries as $gallery)
                                 <!-- Item Project and Filter Name -->
-                                <li class="item-thumbs span6 {{ implode(' ',json_decode($gallery->tags, true)) }}" data-id="id-{{ $loop->iteration }}" data-type="{{ json_decode($gallery->tags, true)[[0]] }}">
+                                <li class="item-thumbs span6 {{ implode(' ',json_decode($gallery->tags, true)) }}" data-id="id-{{ $loop->iteration }}" data-type="{{ json_decode($gallery->tags, true)[0] }}">
                                     <div class="item">
                                     <figure>
                                         <div><img src="{{ asset('galleries/'.$gallery->url) }}" alt=""/></div>

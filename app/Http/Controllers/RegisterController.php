@@ -6,6 +6,7 @@ use App\Models\Register;
 use App\Models\Gelombang;
 use App\Models\Orangtua;
 use App\Http\Requests\RegisterRequest;
+use App\Models\User;
 
 class RegisterController extends Controller
 {
@@ -29,7 +30,7 @@ class RegisterController extends Controller
      */
     public function create()
     {
-        $action = '/admin/register';
+        $action = request()->routeIs('register.create')?'/admin/register':'';
         $date = date('Y-m-d');
         $gelombang = Gelombang::where('pendaftaran_awal', '<=', $date)
                                 ->where('pendaftaran_akhir', '>=', $date)->first();
@@ -56,8 +57,16 @@ class RegisterController extends Controller
         $request->file('ijazah')->storeAs('files-register', $ijazah);
 
         $register = $request->merge(['gelombang_id'=>$gelombang->id])->toArray();
+        $user = User::create([
+            'code' => $register['nisn'],
+            'name' => $register['nama'],
+            'password' => bcrypt($register['tgl_lhr']),
+            'role' => 'peserta'
+        ]);
+        $register['user_id'] = $user->id;
         $register['foto'] = $foto;
         $register['ijazah'] = $ijazah;
+        $register['is_read'] = !is_null(auth()->user())?1:0;
 
         $id = Register::create($register)->id;
         Orangtua::create($request->merge(['register_id'=>$id])->toArray());
@@ -76,6 +85,7 @@ class RegisterController extends Controller
      */
     public function show(Register $register)
     {
+        $register->update(['is_read'=>1]);
         return request()->ajax()?response()->json($register):view('admin.register.detail_register', compact('register'));
     }
 
@@ -120,9 +130,10 @@ class RegisterController extends Controller
         }
 
         $register->update($data);
+        $register->user->update(['code'=>$data['nisn']]);
         $register->orangtua->update($request->all());
 
-        return redirect('admin/register')->with('success', 'Data Register berhasil diubah.');
+        return redirect(auth()->user()->role=='peserta'?'user/index':'admin/register')->with('success', 'Data Register berhasil diubah.');
     }
 
     /**

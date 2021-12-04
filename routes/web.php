@@ -15,22 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home');
 
-// Gallery tampilan user
-Route::view('kegiatan','kegiatan');
-Route::view('fasilitas','fasilitas');
-
+// Halaman difrontend
+Route::get('gallery/{kategori}', 'GalleryController@show')->where('kategori', 'fasilitas|kegiatan');
 Route::view('prosedur','prosedur');
 Route::get('jurusan','JurusanController@index');
 Route::view('cek_hasil','cek_hasil');
 Route::get('hasil', 'PesertaController@cek_hasil');
-
 Route::get('jadwal', 'RegisterController@jadwal');
 Route::view('contact','contact');
-
-//pendaftaran_calon_siswa
-Route::view('pendaftaran','admin/pendaftaran');
-
-Route::get('kerjasama','KerjasamaController@index');
+Route::get('kerjasama','MitraKerjaController@kerjasama');
 
 //testimoni
 //Route::view('/testimoni','create');
@@ -41,9 +34,22 @@ Route::post('/testimoni','TestimoniController@store');
 // Authentication
 Route::view('login_admin','auth.login_admin')->name('login');
 Route::post('login_admin', 'LoginController@login_admin')->name('login.post');
+Route::view('login_siswa','auth.login_siswa')->name('login_siswa');
+Route::post('login_siswa', 'LoginController@login_siswa')->name('login_siswa.post');
 Route::get('logout', 'LoginController@logout');
 
-Route::group(['prefix'=>'admin/', 'middleware'=>'auth'], function(){
+// registrasi oleh user
+Route::get('register', 'RegisterController@create');
+Route::post('register', 'RegisterController@store');
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('siswa/{peserta}/cetak', 'PesertaController@cetak')->name('cetak_kartu');
+    Route::view('profile', 'profile');
+    Route::post('change-profile', 'UserController@change_profile')->name('change-profile');
+    Route::post('change-password', 'UserController@change_password')->name('change-password');
+});
+
+Route::group(['prefix'=>'admin/', 'middleware'=>['auth','role:super_admin,admin']], function(){
     Route::view('index','admin.dashboard');
 
     //Register
@@ -53,12 +59,11 @@ Route::group(['prefix'=>'admin/', 'middleware'=>'auth'], function(){
     Route::get('siswa', 'PesertaController@siswa');
     Route::post('siswa/export', 'PesertaController@siswa_export');
     Route::post('siswa/{peserta}', 'PesertaController@update');
-    Route::post('siswa/{peserta}/cetak', 'PesertaController@cetak')->name('cetak_kartu');
 
     //Pembayaran calon siswa
     Route::resource('pembayaran', PembayaranController::class);
 
-    Route::middleware('can:admin')->group(function(){
+    Route::middleware('role:super_admin')->group(function(){
         Route::resource('user', UserController::class);
 
         Route::view('preview', 'exports.kartu');
@@ -76,9 +81,6 @@ Route::group(['prefix'=>'admin/', 'middleware'=>'auth'], function(){
         //gelombang
         Route::resource('gelombang', GelombangController::class);
 
-        //kerjasama
-        Route::resource('kerjasama', KerjasamaController::class);
-
         //Slide
         Route::view('slide', 'admin.slide');
         Route::get('slide/create','SlideController@create');
@@ -89,7 +91,15 @@ Route::group(['prefix'=>'admin/', 'middleware'=>'auth'], function(){
 
         Route::get('web_setting', 'SettingController@web_setting');
         Route::post('web_setting', 'SettingController@post_web_setting');
+
+        // Mitra industri
+        Route::resource('mitra-kerja', MitraKerjaController::class);
+
+        Route::resource('testimoni', TestimoniController::class);
     });
 });
 
-Route::get('register', 'RegisterController@create');
+Route::group(['middleware'=>['auth','role:peserta'], 'prefix'=>'user'], function(){
+    Route::view('index', 'user.index');
+    Route::post('register/{register}', 'RegisterController@update');
+});

@@ -37,6 +37,11 @@ class Register extends Model
         return $this->hasOneThrough(Tahun_Ajaran::class, Gelombang::class, 'tahun_ajaran_id', 'id', 'gelombang_id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function getUniqCodeAttribute()
     {
         if(!is_null($this->peserta)) return $this->peserta->no_peserta;

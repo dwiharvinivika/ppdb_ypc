@@ -1,4 +1,4 @@
-@if (request()->routeIs('register.edit'))
+@if (!request()->routeIs('register.create'))
     <div class="alert alert-info font-weight-bold">Jika tidak ingin merubah fotonya, bisa diliwat.</div>
 @endif
 <label class="col-form-label col-md-2 col-sm-2 label-align">Foto</label>

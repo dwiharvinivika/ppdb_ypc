@@ -99,4 +99,36 @@ class UserController extends Controller
         $user->delete();
         return back()->with('success', 'Data Admin berhasil dihapus.');
     }
+
+    public function change_profile(Request $request)
+    {
+        $validate = $request->validate([
+            'avatar' => 'sometimes|image',
+            'name' => 'required|string',
+            'email' => 'required|unique:users,email,'.auth()->user()->id.',id'
+        ]);
+
+        if($request->hasFile('avatar')){
+            if(file_exists(public_path('img/avatars/'.auth()->user()->avatar))){
+                unlink(public_path('img/avatars/'.auth()->user()->avatar));
+            }
+            $avatar = $request->file('avatar');
+            $name = 'avatar-'.uniqid().'.'.$avatar->getClientOriginalExtension();
+            $avatar->move('img/avatars/', $name);
+            $validate['avatar'] = 'img/avatars/'.$name;
+        }
+        auth()->user()->update($validate);
+        return back()->with('success', 'Profile berhasil diupdate');
+    }
+
+    public function change_password(Request $request)
+    {
+        $validate = $request->validate([
+            'old_password' => 'required|password',
+            'password' => 'required|min:6|same:confirmation_password'
+        ]);
+        $validate['password'] = bcrypt($validate['password']);
+        auth()->user()->update($validate);
+        return back()->with('success', 'Password berhasil diubah');
+    }
 }
