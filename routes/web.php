@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -102,4 +104,12 @@ Route::group(['prefix'=>'admin/', 'middleware'=>['auth','role:super_admin,admin'
 Route::group(['middleware'=>['auth','role:peserta'], 'prefix'=>'user'], function(){
     Route::view('index', 'user.index');
     Route::post('register/{register}', 'RegisterController@update');
+});
+
+Route::post('tambah-nama-sekolah', function(Request $request){
+    $request->validate(['namasekolah'=>'required|unique:asal_sekolah,namasekolah']);
+    DB::table('asal_sekolah')->insert([
+        'namasekolah'=>strtoupper($request->namasekolah),
+    ]);
+    return strtoupper($request->namasekolah);
 });

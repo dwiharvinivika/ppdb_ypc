@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,5 +20,6 @@ class DatabaseSeeder extends Seeder
             'role' => 'super_admin'
         ]);
         $this->call(JurusanSeeder::class);
+        DB::raw(file_get_contents(__DIR__.'/asal_sekolah.sql'));
     }
 }

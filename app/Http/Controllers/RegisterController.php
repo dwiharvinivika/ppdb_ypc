@@ -50,13 +50,18 @@ class RegisterController extends Controller
         $gelombang = Gelombang::where('pendaftaran_awal', '<=', $date)
                                 ->where('pendaftaran_akhir', '>=', $date)->firstOrFail();
 
-        $foto = 'foto_'.date('Y-m-d').'.'.$request->file('foto')->getClientOriginalExtension();
-        $ijazah = 'ijazah_'.date('Y-m-d').'.'.$request->file('ijazah')->getClientOriginalExtension();
-
-        $request->file('foto')->storeAs('files-register', $foto);
-        $request->file('ijazah')->storeAs('files-register', $ijazah);
-
         $register = $request->merge(['gelombang_id'=>$gelombang->id])->toArray();
+        if($request->hasFile('foto')){
+            $foto = 'foto_'.date('Y-m-d').'.'.$request->file('foto')->getClientOriginalExtension();
+            $request->file('foto')->storeAs('files-register', $foto);
+            $register['foto'] = $foto;
+        }
+        if($request->hasFile('ijazah')){
+            $ijazah = 'ijazah_'.date('Y-m-d').'.'.$request->file('ijazah')->getClientOriginalExtension();
+            $request->file('ijazah')->storeAs('files-register', $ijazah);
+            $register['ijazah'] = $ijazah;
+        }
+
         $user = User::create([
             'code' => $register['nisn'],
             'name' => $register['nama'],
@@ -64,10 +69,8 @@ class RegisterController extends Controller
             'role' => 'peserta'
         ]);
         $register['user_id'] = $user->id;
-        $register['foto'] = $foto;
-        $register['ijazah'] = $ijazah;
         $register['is_read'] = !is_null(auth()->user())?1:0;
-
+        $register['alamat_siswa'] = $register['kabupaten'].'~'.$register['kecamatan'].'~'.$register['kelurahan'].'~'.$register['rt'].'~'.$register['rw'].'~'.$register['alamat_rumah'].'~'.$register['kodepos'].'~'.$register['no_rumah'];
         $id = Register::create($register)->id;
         Orangtua::create($request->merge(['register_id'=>$id])->toArray());
 

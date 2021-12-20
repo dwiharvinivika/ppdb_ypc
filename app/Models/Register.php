@@ -72,6 +72,15 @@ class Register extends Model
         return '<span class="badge badge-danger">Belum Bayar</span>';
     }
 
+    public function getKabupatenAttribute() { return explode('~',$this->alamat_siswa)[0]??''; }
+    public function getKecamatanAttribute() { return explode('~',$this->alamat_siswa)[1]??''; }
+    public function getKelurahanAttribute() { return explode('~',$this->alamat_siswa)[2]??''; }
+    public function getRtAttribute() { return explode('~',$this->alamat_siswa)[3]??''; }
+    public function getRwAttribute() { return explode('~',$this->alamat_siswa)[4]??''; }
+    public function getAlamatRumahAttribute() { return explode('~',$this->alamat_siswa)[5]??''; }
+    public function getKodePosAttribute() { return explode('~',$this->alamat_siswa)[6]??''; }
+    public function getNoRumahAttribute() { return explode('~',$this->alamat_siswa)[7]??''; }
+
     public function getTtlAttribute()
     {
         return $this->tmp_lhr.', '.$this->tgl_lhr;
