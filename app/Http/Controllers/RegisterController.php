@@ -76,7 +76,7 @@ class RegisterController extends Controller
 
         // $this->whatsappNotification($request->hp_siswa);
 
-        $url = auth()->check()?redirect('admin/register'):back();
+        $url = $request->is('register')?redirect('login_siswa'):redirect('admin/register');
         return $url->with('success', 'Register berhasil dilakukan.');
     }
 

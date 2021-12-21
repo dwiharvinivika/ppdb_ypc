@@ -52,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::group(['prefix'=>'admin/', 'middleware'=>['auth','role:super_admin,admin']], function(){
-    Route::view('index','admin.dashboard');
+    Route::get('index','AdminController@index');
 
     //Register
     Route::resource('register', RegisterController::class);

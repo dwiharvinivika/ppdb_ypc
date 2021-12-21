@@ -65,5 +65,10 @@
         </div>
       </div>
     </div>
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    @if (session()->has('success'))
+        <script> Toast.fire({ icon: 'success', title: '{{ session("success") }}' }) </script>
+    @endif
   </body>
 </html>
