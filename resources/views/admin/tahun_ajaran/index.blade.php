@@ -19,11 +19,6 @@
                                 <tr>
                                     <td colspan=6><a href="tahun_ajaran/create" my='3' class="btn btn-xs btn-primary"><i class="fa fa-plus"></i> Tambah</a></td>
                                 </tr>
-                                @if(session('status'))
-                                    <div class="alert alert-success">
-                                        {{ session('status') }}
-                                    </div>
-                                @endif
                                 <tr>
                                     <th>No</th>
                                     <th>Tahun Ajaran</th>
@@ -63,7 +58,6 @@
 @push('js')
     <script>
         $('input[name=tahun_aktif]').bootstrapSwitch()
-        // $('input[name=tahun_aktif]').on('change', function(){
         $('input[name=tahun_aktif]').on('switchChange.bootstrapSwitch', function(){
             console.log('Nilainya : '+$(this).val());
             $.ajax({

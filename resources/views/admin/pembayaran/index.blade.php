@@ -30,6 +30,7 @@
                                     <th><center>Nama Peserta</center></th>
                                     <th><center>Jenis Pembayaran</center></th>
                                     <th><center>Status Pembayaran</center></th>
+                                    <th><center>Terverifikasi</center></th>
                                     <th><center>Opsi</center></th>
                                 </tr>
                             </thead>
@@ -47,6 +48,11 @@
                                         </select>
                                     </td>
                                     <td>{!! $register->status_pembayaran !!}</td>
+                                    <td>
+                                        @if ($register->pembayaran)
+                                            <input type="checkbox" {{ $register->pembayaran?'':'disable' }} data-off-text="Belum" data-on-text="Sudah" name="is_verified" id="" {{ $register->pembayaran->is_verified?'checked':'' }} data-id="{{ $register->pembayaran->id }}" value="1">
+                                        @endif
+                                    </td>
                                     <td><a href="/admin/register/{{ $register->id }}" class="btn btn-sm btn-info"> Detail </a></td>
                                 </tr>
                             @endforeach
@@ -134,6 +140,21 @@
                     $('#example-modal').modal('show')
                     $('#jns').text($(this).val())
                     $('#nm_siswa').text(result.nama)
+                }
+            })
+        })
+
+        $('input[name=is_verified]').bootstrapSwitch()
+        $('input[name=is_verified]').on('switchChange.bootstrapSwitch', function(){
+            $.ajax({
+                url: '/admin/pembayaran/'+$(this).data('id')+'/verified',
+                data: {is_verified:$(this).is(':checked')?1:0,_token:$('input[name=_token]').val(),_method:'put'},
+                method: 'post',
+                success: function({nama,action}){
+                    Toast.fire({
+                        icon: 'success',
+                        title: `Calon Siswa ${nama} berhasil di${action}`
+                    })
                 }
             })
         })

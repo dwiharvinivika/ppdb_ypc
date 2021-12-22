@@ -64,6 +64,7 @@ Route::group(['prefix'=>'admin/', 'middleware'=>['auth','role:super_admin,admin'
 
     //Pembayaran calon siswa
     Route::resource('pembayaran', PembayaranController::class);
+    Route::put('pembayaran/{pembayaran}/verified', 'PembayaranController@verified');
 
     Route::middleware('role:super_admin')->group(function(){
         Route::resource('user', UserController::class);
@@ -103,6 +104,8 @@ Route::group(['prefix'=>'admin/', 'middleware'=>['auth','role:super_admin,admin'
 
 Route::group(['middleware'=>['auth','role:peserta'], 'prefix'=>'user'], function(){
     Route::view('index', 'user.index');
+    Route::view('pembayaran', 'user.pembayaran');
+    Route::put('pembayaran/{pembayaran}', 'PembayaranController@update')->name('user.pembayaran');
     Route::post('register/{register}', 'RegisterController@update');
 });
 

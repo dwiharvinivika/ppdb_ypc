@@ -58,7 +58,7 @@ class RegisterController extends Controller
         }
         if($request->hasFile('ijazah')){
             $ijazah = 'ijazah_'.date('Y-m-d').'.'.$request->file('ijazah')->getClientOriginalExtension();
-            $request->file('ijazah')->storeAs('files-register', $ijazah);
+            $request->file('ijazah')->storeAs('public/files-register', $ijazah);
             $register['ijazah'] = $ijazah;
         }
 
@@ -123,7 +123,7 @@ class RegisterController extends Controller
         $data = $request->merge(['gelombang_id'=>$gelombang->id])->toArray();
         if($request->hasFile('foto')){
             $foto = 'foto_'.date('Y-m-d').'.'.$request->file('foto')->getClientOriginalExtension();
-            $request->file('foto')->storeAs('files-register', $foto);
+            $request->file('foto')->storeAs('public/files-register', $foto);
             $data['foto'] = $foto;
         }
         if($request->hasFile('ijazah')){

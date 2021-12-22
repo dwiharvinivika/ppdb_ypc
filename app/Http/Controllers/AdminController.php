@@ -27,15 +27,15 @@ class AdminController extends Controller
     public function data_statistik(Request $request)
     {
         $now = Carbon::now();
-        $register = Register::whereHas('tahun_ajaran', function($q){$q->where('status','Aktif');})->get();
-        $calon_siswa = Register::whereHas('tahun_ajaran', function($q){$q->where('status','Aktif');})->whereHas('peserta')->get();
+        $start = $request->start??$now->copy()->subtract('days', 20)->format('Y-m-d');
+        $end = $request->end??$now->format('Y-m-d');
+        $register = Register::whereHas('tahun_ajaran', function($q){$q->where('status','Aktif');})
+                    ->whereDate('created_at', '>=', $start)->whereDate('created_at','<=',$end)->get();
+        $calon_siswa = Register::whereHas('tahun_ajaran', function($q){$q->where('status','Aktif');})
+                    ->whereDate('created_at', '>=', $start)->whereDate('created_at','<=',$end)->whereHas('peserta')->get();
         $chart_register_data = [];
         $chart_calon_siswa_data = [];
-        if(!is_null($request->start)&&!is_null($request->end)){
-            $period = CarbonPeriod::create($request->start, $request->end);
-        }else{
-            $period = CarbonPeriod::create($now->copy()->subtract('days', 20)->format('Y-m-d'), $now->format('Y-m-d'));
-        }
+        $period = CarbonPeriod::create($start, $end);
         foreach($period as $p){
             $chart_register_data[] = [
                 $p->getTimestampMs(),
