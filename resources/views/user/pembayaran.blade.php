@@ -50,10 +50,10 @@
                                 <div class="form-group">
                                     <label>Bukti Pembayaran</label>
                                     <div class="custom-file">
-                                        <input type="file" id="bukti" name="bukti" class="custom-file-input">
+                                        <input type="file" id="bukti" name="bukti" class="custom-file-input" accept="image/*">
                                         <label for="bukti" class="custom-file-label">Silahkan Pilih Gambar Bukti Pembayaran</label>
                                     </div>
-                                </div>
+                                </div>`
                                 <div class="form-group mt-3">
                                     <button class="btn btn-success w-100">Kirim</button>
                                 </div>

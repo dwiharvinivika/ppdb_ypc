@@ -38,6 +38,8 @@
             @endcanany
             @can('peserta')
                 <li><a href="/user/index">Dashboard</a></li>
+                <li><a href="/user/pembayaran">Konfirmasi Pembayaran</a></li>
+                <li><a href="/user/nilai-rapot">Nilai Rapot</a></li>
             @endcan
         </ul>
     </div>

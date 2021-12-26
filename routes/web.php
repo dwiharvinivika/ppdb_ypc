@@ -107,6 +107,8 @@ Route::group(['middleware'=>['auth','role:peserta'], 'prefix'=>'user'], function
     Route::view('pembayaran', 'user.pembayaran');
     Route::put('pembayaran/{pembayaran}', 'PembayaranController@update')->name('user.pembayaran');
     Route::post('register/{register}', 'RegisterController@update');
+    Route::get('nilai-rapot', 'RaportController@index');
+    Route::post('nilai-rapot', 'RaportController@update');
 });
 
 Route::post('tambah-nama-sekolah', function(Request $request){

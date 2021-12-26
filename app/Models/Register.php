@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Raport;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -91,6 +92,11 @@ class Register extends Model
         $jur_id = 'jur'.$ke.'_id';
         $jurusan = DB::table('jurusan')->select('jurusan')->where('id', $this->$jur_id)->first();
         return strip_tags($jurusan->jurusan);
+    }
+
+    public function raports()
+    {
+        return $this->hasMany(Raport::class);
     }
 }
 
