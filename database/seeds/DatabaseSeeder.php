@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('123456'),
             'role' => 'super_admin'
         ]);
-        $this->call(JurusanSeeder::class);
-        DB::raw(file_get_contents(__DIR__.'/asal_sekolah.sql'));
+        $this->call([JurusanSeeder::class,AchievementCategoriesSeeder::class]);
+        DB::insert(file_get_contents(__DIR__.'/asal_sekolah.sql'));
     }
 }

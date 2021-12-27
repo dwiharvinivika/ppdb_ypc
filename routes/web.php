@@ -66,6 +66,9 @@ Route::group(['prefix'=>'admin/', 'middleware'=>['auth','role:super_admin,admin'
     Route::resource('pembayaran', PembayaranController::class);
     Route::put('pembayaran/{pembayaran}/verified', 'PembayaranController@verified');
 
+    Route::get('nilai-raport', 'RaportController@admin');
+    Route::get('nilai-raport/{register}', 'RaportController@show');
+
     Route::middleware('role:super_admin')->group(function(){
         Route::resource('user', UserController::class);
 
@@ -109,6 +112,9 @@ Route::group(['middleware'=>['auth','role:peserta'], 'prefix'=>'user'], function
     Route::post('register/{register}', 'RegisterController@update');
     Route::get('nilai-rapot', 'RaportController@index');
     Route::post('nilai-rapot', 'RaportController@update');
+    Route::get('data-prestasi', 'AchievementController@index');
+    Route::post('data-prestasi', 'AchievementController@store');
+    Route::delete('data-prestasi/{achievement}', 'AchievementController@destroy')->name('data-prestasi.delete');
 });
 
 Route::post('tambah-nama-sekolah', function(Request $request){

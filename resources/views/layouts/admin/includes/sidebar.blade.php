@@ -34,12 +34,13 @@
                 </ul>
             </li>
             <li class="{{ request()->is('admin/pembayaran')?'active':'' }}"><a href="/admin/pembayaran"><i class="fa fa-money"></i> Pembayaran</a></li>
-            <li><a href="javascript:void(0)"><i class="fa fa-file-text-o"></i> Nilai Raport</a></li>
+            <li class="{{ request()->is('admin/nilai-raport*')?'active':'' }}"><a href="nilai-raport"><i class="fa fa-file-text-o"></i> Nilai Raport</a></li>
             @endcanany
             @can('peserta')
                 <li><a href="/user/index">Dashboard</a></li>
                 <li><a href="/user/pembayaran">Konfirmasi Pembayaran</a></li>
                 <li><a href="/user/nilai-rapot">Nilai Rapot</a></li>
+                <li><a href="/user/data-prestasi">Data Prestasi</a></li>
             @endcan
         </ul>
     </div>

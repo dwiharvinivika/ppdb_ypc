@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Raport;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -97,6 +96,27 @@ class Register extends Model
     public function raports()
     {
         return $this->hasMany(Raport::class);
+    }
+
+    public function achievements()
+    {
+        return $this->hasMany(Achievement::class);
+    }
+
+    public function avgRaportValue($semester)
+    {
+        return number_format($this->raports()->where('semester', $semester)->avg('Matematika','Bahasa_Indonesia','Bahasa_Inggris','IPA','Pendidikan_Agama_Islam'), 2);
+    }
+
+    public function getSumAchievementAttribute()
+    {
+        $achievement_categories = collect(DB::table('achievement_categories')->get());
+        $total = 0;
+        foreach($this->achievements as $achievement){
+            $ach = $achievement_categories->where('category',$achievement->category)->where('tingkat', $achievement->juara)->first();
+            $total += ($achievement->kelompok=='tunggal')?$ach->tunggal:$ach->beregu;
+        }
+        return $total;
     }
 }
 

@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Raport;
+use App\Models\Raport;
+use App\Models\Register;
 use Illuminate\Http\Request;
 
 class RaportController extends Controller
@@ -18,6 +19,20 @@ class RaportController extends Controller
             }
         }
         return view('user.rapot', compact('nilai', 'values'));
+    }
+
+    public function admin()
+    {
+        $register = Register::whereHas('peserta')->get();
+        return view('admin.raport.index', compact('register'));
+    }
+
+    public function show(Register $register)
+    {
+        $info = collect($register->toArray())->only('nisn','nama', 'tmp_lhr','tgl_lhr','alamat_siswa');
+        $info['jurusan1'] = $register->jurusan(1);
+        $info['jurusan2'] = $register->jurusan(2);
+        return view('admin.raport.show', compact('register', 'info'));
     }
 
     public function update(Request $request)
