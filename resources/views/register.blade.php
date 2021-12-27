@@ -118,6 +118,7 @@
         </script>
     @endif
     <script src="{{asset('backend') }}/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
+    @stack('js')
     @livewireScripts
 </body>
 </html>

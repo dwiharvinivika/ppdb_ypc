@@ -72,6 +72,15 @@ class Register extends Model
         return '<span class="badge badge-danger">Belum Bayar</span>';
     }
 
+    public function getKabupatenAttribute() { return explode('~',$this->alamat_siswa)[0]??''; }
+    public function getKecamatanAttribute() { return explode('~',$this->alamat_siswa)[1]??''; }
+    public function getKelurahanAttribute() { return explode('~',$this->alamat_siswa)[2]??''; }
+    public function getRtAttribute() { return explode('~',$this->alamat_siswa)[3]??''; }
+    public function getRwAttribute() { return explode('~',$this->alamat_siswa)[4]??''; }
+    public function getAlamatRumahAttribute() { return explode('~',$this->alamat_siswa)[5]??''; }
+    public function getKodePosAttribute() { return explode('~',$this->alamat_siswa)[6]??''; }
+    public function getNoRumahAttribute() { return explode('~',$this->alamat_siswa)[7]??''; }
+
     public function getTtlAttribute()
     {
         return $this->tmp_lhr.', '.$this->tgl_lhr;
@@ -82,6 +91,32 @@ class Register extends Model
         $jur_id = 'jur'.$ke.'_id';
         $jurusan = DB::table('jurusan')->select('jurusan')->where('id', $this->$jur_id)->first();
         return strip_tags($jurusan->jurusan);
+    }
+
+    public function raports()
+    {
+        return $this->hasMany(Raport::class);
+    }
+
+    public function achievements()
+    {
+        return $this->hasMany(Achievement::class);
+    }
+
+    public function avgRaportValue($semester)
+    {
+        return number_format($this->raports()->where('semester', $semester)->avg('Matematika','Bahasa_Indonesia','Bahasa_Inggris','IPA','Pendidikan_Agama_Islam'), 2);
+    }
+
+    public function getSumAchievementAttribute()
+    {
+        $achievement_categories = collect(DB::table('achievement_categories')->get());
+        $total = 0;
+        foreach($this->achievements as $achievement){
+            $ach = $achievement_categories->where('category',$achievement->category)->where('tingkat', $achievement->juara)->first();
+            $total += ($achievement->kelompok=='tunggal')?$ach->tunggal:$ach->beregu;
+        }
+        return $total;
     }
 }
 

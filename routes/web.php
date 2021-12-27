@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::group(['prefix'=>'admin/', 'middleware'=>['auth','role:super_admin,admin']], function(){
-    Route::view('index','admin.dashboard');
+    Route::get('index','AdminController@index');
 
     //Register
     Route::resource('register', RegisterController::class);
@@ -62,6 +64,10 @@ Route::group(['prefix'=>'admin/', 'middleware'=>['auth','role:super_admin,admin'
 
     //Pembayaran calon siswa
     Route::resource('pembayaran', PembayaranController::class);
+    Route::put('pembayaran/{pembayaran}/verified', 'PembayaranController@verified');
+
+    Route::get('nilai-raport', 'RaportController@admin');
+    Route::get('nilai-raport/{register}', 'RaportController@show');
 
     Route::middleware('role:super_admin')->group(function(){
         Route::resource('user', UserController::class);
@@ -101,7 +107,25 @@ Route::group(['prefix'=>'admin/', 'middleware'=>['auth','role:super_admin,admin'
 
 Route::group(['middleware'=>['auth','role:peserta'], 'prefix'=>'user'], function(){
     Route::view('index', 'user.index');
+<<<<<<< HEAD
     Route::view('data-rapot', 'user.data_raport');
     Route::view('konfirmasi_pembayaran', 'user.konfirmasi_pembayaran');
+=======
+    Route::view('pembayaran', 'user.pembayaran');
+    Route::put('pembayaran/{pembayaran}', 'PembayaranController@update')->name('user.pembayaran');
+>>>>>>> deb5266564b6bc9ebf0a186394618064773e04cb
     Route::post('register/{register}', 'RegisterController@update');
+    Route::get('nilai-rapot', 'RaportController@index');
+    Route::post('nilai-rapot', 'RaportController@update');
+    Route::get('data-prestasi', 'AchievementController@index');
+    Route::post('data-prestasi', 'AchievementController@store');
+    Route::delete('data-prestasi/{achievement}', 'AchievementController@destroy')->name('data-prestasi.delete');
+});
+
+Route::post('tambah-nama-sekolah', function(Request $request){
+    $request->validate(['namasekolah'=>'required|unique:asal_sekolah,namasekolah']);
+    DB::table('asal_sekolah')->insert([
+        'namasekolah'=>strtoupper($request->namasekolah),
+    ]);
+    return strtoupper($request->namasekolah);
 });

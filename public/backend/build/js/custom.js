@@ -1571,7 +1571,7 @@ function init_daterangepicker() {
     console.log('init_daterangepicker');
 
     var cb = function (start, end, label) {
-        console.log(start.toISOString(), end.toISOString(), label);
+        // console.log(start.toISOString(), end.toISOString(), label);
         $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
     };
 
@@ -1589,12 +1589,12 @@ function init_daterangepicker() {
         timePickerIncrement: 1,
         timePicker12Hour: true,
         ranges: {
-            'Today': [moment(), moment()],
-            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-            'This Month': [moment().startOf('month'), moment().endOf('month')],
-            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            'Hari ini': [moment(), moment()],
+            'Kemarin': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            '7 Hari Terakhir': [moment().subtract(6, 'days'), moment()],
+            '30 Hari Terakhir': [moment().subtract(29, 'days'), moment()],
+            'Bulan Ini': [moment().startOf('month'), moment().endOf('month')],
+            'Bulan Terakhir': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
         },
         opens: 'left',
         buttonClasses: ['btn btn-default'],
@@ -1608,8 +1608,8 @@ function init_daterangepicker() {
             fromLabel: 'From',
             toLabel: 'To',
             customRangeLabel: 'Custom',
-            daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-            monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            daysOfWeek: ['Mi', 'Sen', 'Sel', 'Ra', 'Ka', 'Ju', 'Sab'],
+            monthNames: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
             firstDay: 1
         }
     };
@@ -1617,16 +1617,16 @@ function init_daterangepicker() {
     $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
     $('#reportrange').daterangepicker(optionSet1, cb);
     $('#reportrange').on('show.daterangepicker', function () {
-        console.log("show event fired");
+        // console.log("show event fired");
     });
     $('#reportrange').on('hide.daterangepicker', function () {
-        console.log("hide event fired");
+        // console.log("hide event fired");
     });
     $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
-        console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
+        // console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
     });
     $('#reportrange').on('cancel.daterangepicker', function (ev, picker) {
-        console.log("cancel event fired");
+        // console.log("cancel event fired");
     });
     $('#options1').click(function () {
         $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);

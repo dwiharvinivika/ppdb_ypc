@@ -72,17 +72,23 @@ class PembayaranController extends Controller
      */
     public function update(Request $request, $pembayaran)
     {
-        $validate = $request->validate([
+        $rules = [
             'jns_pembayaran' => 'required|in:tunai,transfer',
             'via' => 'required',
             'atas_nama' => 'sometimes|string',
             'via' => 'sometimes|string',
-            'bukti' => 'sometimes|image'
-        ]);
+            'bukti' => 'sometimes|image',
+            'is_verified' => 'sometimes'
+        ];
+        if(auth()->user()->role=='peserta'){
+            $request->merge(['jns_pembayaran'=>'transfer','is_verified'=>0]);
+            // $rules['bukti'] = 'required|image';
+        }
+        $validate = $request->validate($rules);
 
         if($request->hasFile('bukti')){
             $name = 'bukti-'.date('Ymd_His').'.'.$request->file('bukti')->getClientOriginalExtension();
-            $request->file('bukti')->storeAs('bukti', $name);
+            $request->file('bukti')->storeAs('public/bukti', $name);
             $validate['bukti'] = $name;
         }
 
@@ -107,6 +113,12 @@ class PembayaranController extends Controller
     public function destroy(Pembayaran $pembayaran)
     {
         //
+    }
+
+    public function verified(Request $request,Pembayaran $pembayaran)
+    {
+        $pembayaran->update($request->all());
+        return response()->json(['nama'=>$pembayaran->register->nama,'action'=>$request->is_verified?'verifikasi':'unverifikasi']);
     }
 
 }

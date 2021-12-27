@@ -31,26 +31,32 @@ class RegisterRequest extends FormRequest
             'tgl_lhr'=>'required',
             'jk'=>'required',
             'sekolah'=>'required',
-            'alamat_siswa'=>'required',
+            // 'alamat_siswa'=>'required',
             'tb'=>'required',
             'lulus_thn'=>'required',
             'hp_siswa'=>'required',
             'jur1_id'=>'required',
             'jur2_id'=>'required',
-            'peringkat'=>'required',
-            'tgl_reg'=>'required',
+            // 'peringkat'=>'required',
+            // 'tgl_reg'=>'required',
             // 'gel'=>'required',
-            'kodesekolah'=>'required',
-            'kebutuhankhusus'=>'required',
+            // 'kodesekolah'=>'required',
+            // 'kebutuhankhusus'=>'required',
             'transportasi'=>'required',
             'tinggal'=>'required',
-            'kipksp'=>'required',
+            // 'kipksp'=>'required',
             // 'nokipksp'=>'required',
             'jmlsaudara'=>'required',
             'jarak'=>'required',
             'ketjarak'=>'required|max:10',
             'waktu'=>'required',
             'ketwaktu'=>'required|max:15',
+            'kabupaten'=>'required',
+            'kecamatan'=>'required',
+            'kelurahan'=>'required',
+            'rt'=>'required','rw'=>'required',
+            'alamat_rumah'=>'required',
+            'kodepos'=>'required','no_rumah'=>'required',
 
             //Bagian orang tua
             'nama_ayah'=>'required',
@@ -63,13 +69,13 @@ class RegisterRequest extends FormRequest
             'kontak'=>'required',
 
             //Bagian data file
-            'foto'=>'required|image',
-            'ijazah'=>'required|image',
+            // 'foto'=>'required|image',
+            // 'ijazah'=>'required|image',
         ];
-        if(request()->routeIs('register.update')||request()->is('user/register/*')){
-            unset($rules['foto']);
-            unset($rules['ijazah']);
-        }
+        // if(request()->routeIs('register.update')||request()->is('user/register/*')){
+        //     unset($rules['foto']);
+        //     unset($rules['ijazah']);
+        // }
         return $rules;
     }
 }

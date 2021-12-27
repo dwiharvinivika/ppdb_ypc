@@ -52,17 +52,12 @@
                   <tr>
                     <td width="30%">Jenis Kelamin</td>
                     <td width="3%">:</td>
-                    <td>{{ $register->jk }}</td>
+                    <td>{{ $register->jk=='L'?'Laki-laki':'Perempuan' }}</td>
                   </tr>
                   <tr>
                     <td width="30%">Asal Sekolah</td>
                     <td width="3%">:</td>
                     <td>{{ $register->sekolah }}</td>
-                  </tr>
-                  <tr>
-                    <td width="30%">Peringkat</td>
-                    <td width="3%">:</td>
-                    <td>{{ $register->peringkat }}</td>
                   </tr>
                   <tr>
                     <td width="30%">Alamat Siswa</td>
@@ -87,17 +82,17 @@
                   <tr>
                     <td>Jurusan 1</td>
                     <td>:</td>
-                    <td>{{ $register->jur1 }}</td>
+                    <td>{{ $register->jurusan(1) }}</td>
                   </tr>
                   <tr>
                     <td>Jurusan 2</td>
                     <td>:</td>
-                    <td>{{ $register->jur2 }}</td>
+                    <td>{{ $register->jurusan(2) }}</td>
                   </tr>
                   <tr>
                     <td>Tanggal Registrasi</td>
                     <td>:</td>
-                    <td>{{ $register->tgl_reg }}</td>
+                    <td>{{ $register->created_at }}</td>
                   </tr>
                   <tr>
                     <td>Gelombang</td>
@@ -115,14 +110,9 @@
                     <td>{{ $register->ijazah }}</td>
                   </tr>
                   <tr>
-                    <td width="30%">Kode Sekolah</td>
+                    <td width="30%">Asal Sekolah</td>
                     <td width="5%">:</td>
-                    <td>{{ $register->kodesekolah }}</td>
-                  </tr>
-                  <tr>
-                    <td width="30%">Kebutuhan Khusus</td>
-                    <td width="5%">:</td>
-                    <td>{{ $register->kebutuhankhusus }}</td>
+                    <td>{{ $register->sekolah }}</td>
                   </tr>
                   <tr>
                     <td width="30%">Transportasi</td>
@@ -135,39 +125,24 @@
                     <td>{{ $register->tinggal }}</td>
                   </tr>
                   <tr>
-                    <td width="30%">KIP/KSP</td>
-                    <td width="5%">:</td>
-                    <td>{{ $register->kipksp }}</td>
-                  </tr>
-                  <tr>
                     <td width="30%">Jumlah Saudara</td>
                     <td width="5%">:</td>
-                    <td>{{ $register->jmlsaudara }}</td>
+                    <td>{{ $register->jmlsaudara }} bersaudara</td>
                   </tr>
                   <tr>
                     <td width="30%">Jarak</td>
                     <td width="5%">:</td>
-                    <td>{{ $register->jarak }}</td>
-                  </tr>
-                  <tr>
-                    <td width="30%">Keterangan Jarak</td>
-                    <td width="5%">:</td>
-                    <td>{{ $register->ketjarak }}</td>
+                    <td>{{ $register->jarak }} {{ $register->ketjarak }}</td>
                   </tr>
                   <tr>
                     <td width="30%">Waktu</td>
                     <td width="5%">:</td>
-                    <td>{{ $register->waktu }}</td>
-                  </tr>
-                  <tr>
-                    <td width="30%">Keterangan Waktu</td>
-                    <td width="5%">:</td>
-                    <td>{{ $register->ketwaktu }}</td>
+                    <td>{{ $register->waktu }} {{ $register->ketwaktu }}</td>
                   </tr>
                   <tr>
                     <td colspan="3">
                         <a href="/admin/register" class="btn btn-sm btn-success"> Kembali </a>
-                        <a href="/admin/orangtua/{{ $register->nisn }}" class="btn btn-sm btn-info"> Input Data Orangtua </a>
+                        <a href="/admin/orangtua/{{ $register->id }}" class="btn btn-sm btn-info"> Input Data Orangtua </a>
                     </td>
                   </tr>
                 </tbody>

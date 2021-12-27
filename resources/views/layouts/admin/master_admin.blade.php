@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="{{ asset('backend/vendors/bootstrap-switch-3.3.4/dist/css/bootstrap3/bootstrap-switch.min.css') }}">
     <!-- Custom Theme Style -->
     <link href="{{asset('backend') }}/build/css/custom.min.css" rel="stylesheet">
+    @stack('css')
     @livewireStyles()
   </head>
 

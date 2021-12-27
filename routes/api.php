@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('set-tahun-aktif', 'Tahun_AjaranController@set_aktif');
 Route::post('change-slide', 'SettingController@slide');
+Route::get('data-statistik', 'AdminController@data_statistik');
