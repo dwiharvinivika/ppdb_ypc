@@ -30,6 +30,7 @@
                                     <th><center>Nama Peserta</center></th>
                                     <th><center>Jenis Pembayaran</center></th>
                                     <th><center>Status Pembayaran</center></th>
+                                    
                                     <th><center>Opsi</center></th>
                                 </tr>
                             </thead>

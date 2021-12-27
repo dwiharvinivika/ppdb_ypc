@@ -17,7 +17,7 @@
                         <ul>
                             <li><i class="icon-ok"></i> Pendaftaran : {{ $g->pendaftaran }} </li>
                             <li><i class="icon-ok"></i> Pengumuman Hasil : {{ $g->pengumuman }} </li>
-                            <li><i class="icon-ok"></i> Daftar Ulang : {{ $g->daftar_ulang }} </li>
+                            <li><i class="icon-ok"></i> Daftar Ulang : {{ $g->pengumuman }} s.d {{ $g->daftar_ulang }} </li>
                         </ul>
                     </div>
                 </div>

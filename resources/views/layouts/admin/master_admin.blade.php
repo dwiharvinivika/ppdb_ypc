@@ -93,7 +93,7 @@
             </div>
             <nav class="nav navbar-nav">
             <ul class=" navbar-right">
-              <span class="h3">Tahun Ajaran <span id="tahun-ajaran">{{ App\Models\Tahun_Ajaran::where('status', 'Aktif')->first()->tahun_ajaran }}</span></span>
+              <span class="h3">Tahun Ajaran <span id="tahun-ajaran">{{ App\Models\Tahun_Ajaran::where('status', 'Aktif')->first()->tahun_ajaran ??'2022/2023' }}</span></span>
               <li class="nav-item dropdown open" style="padding-left: 15px;">
                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
                   <img src="{{ asset(auth()->user()->avatar) }}" alt="">{{ auth()->user()->name }}

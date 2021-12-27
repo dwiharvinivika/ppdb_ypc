@@ -101,5 +101,7 @@ Route::group(['prefix'=>'admin/', 'middleware'=>['auth','role:super_admin,admin'
 
 Route::group(['middleware'=>['auth','role:peserta'], 'prefix'=>'user'], function(){
     Route::view('index', 'user.index');
+    Route::view('data-rapot', 'user.data_raport');
+    Route::view('konfirmasi_pembayaran', 'user.konfirmasi_pembayaran');
     Route::post('register/{register}', 'RegisterController@update');
 });
