@@ -107,13 +107,10 @@ Route::group(['prefix'=>'admin/', 'middleware'=>['auth','role:super_admin,admin'
 
 Route::group(['middleware'=>['auth','role:peserta'], 'prefix'=>'user'], function(){
     Route::view('index', 'user.index');
-<<<<<<< HEAD
     Route::view('data-rapot', 'user.data_raport');
     Route::view('konfirmasi_pembayaran', 'user.konfirmasi_pembayaran');
-=======
     Route::view('pembayaran', 'user.pembayaran');
     Route::put('pembayaran/{pembayaran}', 'PembayaranController@update')->name('user.pembayaran');
->>>>>>> deb5266564b6bc9ebf0a186394618064773e04cb
     Route::post('register/{register}', 'RegisterController@update');
     Route::get('nilai-rapot', 'RaportController@index');
     Route::post('nilai-rapot', 'RaportController@update');

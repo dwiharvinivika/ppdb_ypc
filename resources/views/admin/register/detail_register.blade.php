@@ -102,12 +102,12 @@
                   <tr>
                     <td width="30%">Foto</td>
                     <td width="5%">:</td>
-                    <td>{{ $register->foto}}</td>
+                    <td><a href="{{ asset('storage/files-register/'.$register->foto) }}"  data-fslightbox="register">{{ $register->foto }}</a></td>
                   </tr>
                   <tr>
                     <td width="30%">No Ijazah</td>
                     <td width="5%">:</td>
-                    <td>{{ $register->ijazah }}</td>
+                    <td><a href="{{ asset('storage/files-register/'.$register->ijazah) }}"  data-fslightbox="register">{{ $register->ijazah }}</a></td>
                   </tr>
                   <tr>
                     <td width="30%">Asal Sekolah</td>
@@ -154,3 +154,7 @@
     </div>
   </div>
 @endsection
+
+@push('js')
+    <script src="{{ asset('js/fslightbox.js') }}"></script>
+@endpush
