@@ -102,9 +102,12 @@
                             <label class="col-form-label col-md-2 col-sm-2 label-align"
                                 for="url">Gambar
                             </label>
-                            <div class="col-md-6 col-sm-6 ">
-                                <input type="file" wire:model='url' name="url" id="url" class="form-control @error('url') is-invalid @enderror">
-                                @error('url')<div class="invalid-feedback"> {{ $message }}</div> @enderror
+                            <div class="col-md-6 col-sm-6">
+                                <div class="custom-file">
+                                    <input type="file" wire:model='url' name="url" id="url" class="custom-file-input @error('url') is-invalid @enderror" accept="image/*">
+                                    <label for="url" class="custom-file-label">Pilih Gambar</label>
+                                    @error('url')<div class="invalid-feedback"> {{ $message }}</div> @enderror
+                                </div>
                             </div>
                         </div>
                         <div class="item form-group">

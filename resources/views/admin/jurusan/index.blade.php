@@ -14,7 +14,7 @@
         <div class="row">
           <div class="col-sm-12">
             <div class="card-box table-responsive">
-              <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+              <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                   <tr>
                     <td colspan=6><a href="jurusan/create" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Tambah</a></td>
@@ -26,9 +26,9 @@
                   @endif
                   <tr>
                     <th>No.</th>
+                    <th>Logo</th>
                     <th>Kode Jurusan</th>
                     <th>Jurusan</th>
-                    <th>Gambar</th>
                     <th>Deskripsi</th>
                     <th>Opsi</th>
                   </tr>
@@ -37,9 +37,11 @@
                 @foreach($jurusan as $jurusan)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
+                    <td>
+                        <img style="max-height: 130px;max-width: 85px;" src="{{ asset('img/jurusan/'.$jurusan->gambar)}}" alt="">
+                    </td>
                     <td>{{ $jurusan->kode_jurusan }}</td>
                     <td>{!! $jurusan->jurusan !!}</td>
-                    <td>{{ $jurusan->gambar}}</td>
                     <td>{{ $jurusan->keterangan }}</td>
                     <td>
                         <a href="{{ route('jurusan.edit', $jurusan) }}" class="btn btn-sm btn-warning"> ubah </a>

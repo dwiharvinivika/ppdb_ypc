@@ -1,11 +1,11 @@
     @livewire('register-form-jurusan', ['register' => $register??null])
     <label class="col-form-label col-md-2 col-sm-2 label-align">NISN</label>
     <div class="col-md-4 col-sm-4  form-group has-feedback">
-        <input type="text" name="nisn" maxlength="15" value="{{ old('nisn', $register->nisn??'') }}" class="form-control" id="inputSuccess2" required>
+        <input type="number" name="nisn" maxlength="15" value="{{ old('nisn', $register->nisn??'') }}" class="form-control noscroll" id="inputSuccess2" required>
     </div>
     <label class="col-form-label col-md-2 col-sm-2 label-align">NIK</label>
     <div class="col-md-4 col-sm-4  form-group has-feedback">
-        <input type="text" name="nik" maxlength="15" value="{{ old('nik', $register->nik??'') }}" class="form-control" id="inputSuccess2" >
+        <input type="number" name="nik" maxlength="15" value="{{ old('nik', $register->nik??'') }}" class="form-control noscroll" id="inputSuccess2" >
     </div>
     <label class="col-form-label col-md-2 col-sm-2 label-align">Nama Lengkap</label>
     <div class="col-md-4 col-sm-4  form-group has-feedback">
@@ -34,22 +34,30 @@
             </div>
         </div>
     </div>
-    <label class="col-form-label col-md-2 col-sm-2 label-align">Asal Sekolah</label>
-    <div class="col-md-4 col-sm-4  form-group has-feedback">
-        <select name="sekolah" id="sekolah" class="form-control">
-            <option value=""></option>
-            @foreach (DB::table('asal_sekolah')->get() as $sekolah)
-                <option value="{{ $sekolah->namasekolah }}" {{ $sekolah->namasekolah==old('sekolah', $register->sekolah??'')?'selected':'' }}>{{ $sekolah->namasekolah }}</option>
-            @endforeach
-        </select>
+    <div class="col-md-6 col-8">
+        <div class="row">
+            <label class="col-form-label col-md-4 label-align">Asal Sekolah</label>
+            <div class="col-md-8  form-group has-feedback">
+                <select name="sekolah" id="sekolah" class="form-control select2">
+                    <option value="">&nbsp;</option>
+                    @foreach (DB::table('asal_sekolah')->get() as $sekolah)
+                        <option value="{{ $sekolah->namasekolah }}" {{ $sekolah->namasekolah==old('sekolah', $register->sekolah??'')?'selected':'' }}>{{ $sekolah->namasekolah }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
     </div>
-    <label class="col-form-label col-md-2 col-sm-2 label-align">Tahun Lulus</label>
-    <div class="col-md-4 col-sm-4  form-group has-feedback">
-        <input type="number" name="lulus_thn" min="2016" max="9999" value="{{ old('lulus_thn', $register->lulus_thn??'') }}" class="form-control" id="inputSuccess2" >
+    <div class="col-md-6 col-4">
+        <div class="row">
+            <label class="col-form-label col-md-4 label-align">Tahun Lulus</label>
+            <div class="col-md-8  form-group has-feedback">
+                <input type="number" name="lulus_thn" min="2016" max="9999" value="{{ old('lulus_thn', $register->lulus_thn??'') }}" class="form-control" id="inputSuccess2" >
+            </div>
+        </div>
     </div>
     <label class="col-form-label col-md-2 col-sm-2 label-align">Kontak (WA Aktif)</label>
     <div class="col-md-4 col-sm-4  form-group has-feedback">
-        <input type="text" name="hp_siswa" maxlength="13" value="{{ old('hp_siswa', $register->hp_siswa??'') }}" class="form-control" id="inputSuccess2">
+        <input type="number" name="hp_siswa" maxlength="13" value="{{ old('hp_siswa', $register->hp_siswa??'') }}" class="form-control noscroll" id="inputSuccess2">
     </div>
     <label class="col-form-label col-md-2 col-sm-2 label-align">Transportasi</label>
     <div class="col-md-4 col-sm-4  form-group has-feedback">
@@ -59,19 +67,27 @@
             <option value="Jalan Kaki">Jalan Kaki</option>
         </select>
     </div>
-    <label class="col-form-label col-md-2 col-sm-2 label-align">Tinggal</label>
-    <div class="col-md-4 col-sm-4  form-group has-feedback">
-        <select name="tinggal" class="form-control">
-            <option value="Kendaraan Pribadi">Bersama Orangtua</option>
-            <option value="Kendaraan Umum">Bersama Saudara</option>
-            <option value="Jalan Kaki">Pesantren</option>
-            <option value="Jalan Kaki">Kost</option>
-            <option value="Jalan Kaki">Lainnya</option>
-        </select>
+    <div class="col-md-6 col-8">
+        <div class="row">
+            <label class="col-form-label col-md-4 label-align">Tinggal</label>
+            <div class="col-md-8 form-group has-feedback">
+                <select name="tinggal" class="form-control">
+                    <option value="Kendaraan Pribadi">Bersama Orangtua</option>
+                    <option value="Kendaraan Umum">Bersama Saudara</option>
+                    <option value="Jalan Kaki">Pesantren</option>
+                    <option value="Jalan Kaki">Kost</option>
+                    <option value="Jalan Kaki">Lainnya</option>
+                </select>
+            </div>
+        </div>
     </div>
-    <label class="col-form-label col-md-2 col-sm-2 label-align">Jumlah Saudara</label>
-    <div class="col-md-4 col-sm-4  form-group has-feedback">
-        <input type="number" name="jmlsaudara" maxlength="13" value="{{ old('jmlsaudara', $register->jmlsaudara??'') }}" class="form-control" id="inputSuccess2">
+    <div class="col-md-6 col-4">
+        <div class="row">
+            <label class="col-form-label col-md-4 label-align">Jumlah Saudara</label>
+            <div class="col-md-8 form-group has-feedback">
+                <input type="number" name="jmlsaudara" maxlength="13" value="{{ old('jmlsaudara', $register->jmlsaudara??'') }}" class="form-control" id="inputSuccess2">
+            </div>
+        </div>
     </div>
     <label class="col-form-label col-md-2 label-align">Jarak</label>
     <div class="col-md-2 col-9 form-group has-feedback">
@@ -96,50 +112,56 @@
         </select>
     </div>
     <label class="col-form-label col-md-2 col-sm-2 label-align">Kabupaten/Kota</label>
-    <div class="col-md-4 col-4 form-group has-feedback">
-        <select name="kabupaten" class="form-control" id="kabupaten">
+    <div class="col-md-4 form-group has-feedback">
+        <select name="kabupaten" class="form-control select2" id="kabupaten">
             <option value="">----Pilih Kabupaten-----</option>
         </select>
     </div>
     <div style="display: none">
         <label class="col-form-label col-md-2 col-sm-2 label-align">Kecamatan</label>
-        <div class="col-md-4 col-4 form-group has-feedback">
-            <select name="kecamatan" class="form-control" id="kecamatan">
+        <div class="col-md-4 form-group has-feedback">
+            <select name="kecamatan" class="form-control select2" id="kecamatan">
 
             </select>
         </div>
     </div>
     <div style="display: none">
         <label class="col-form-label col-md-2 col-sm-2 label-align">Kelurahan</label>
-        <div class="col-md-4 col-4 form-group has-feedback">
-            <select name="kelurahan" class="form-control" id="kelurahan">
+        <div class="col-md-4 form-group has-feedback">
+            <select name="kelurahan" class="form-control select2" id="kelurahan">
 
             </select>
         </div>
     </div>
     <div id="rtrw" style="display: none">
         <label class="col-form-label col-md-2 label-align">RT/RW</label>
-        <div class="col-md-2 col-9 form-group has-feedback">
+        <div class="col-md-2 col-6 form-group has-feedback">
             <input type="number" name="rt" min="0" max="13" value="{{ old('rt', $register->rt??'') }}" class="form-control" id="inputSuccess2">
         </div>
-        <div class="col-md-2 col-9 form-group has-feedback">
+        <div class="col-md-2 col-6 form-group has-feedback">
             <input type="number" name="rw" min="0" max="13" value="{{ old('rw', $register->rw??'') }}" class="form-control" id="inputSuccess2">
         </div>
     </div>
-    <label class="col-form-label col-md-2 col-sm-2 label-align">Alamat Rumah</label>
-    <div class="col-md-4 col-9 form-group has-feedback">
+    <label class="col-form-label col-md-2 label-align">Alamat Rumah</label>
+    <div class="col-md-4 form-group has-feedback">
         <input type="text" name="alamat_rumah" min="0" max="13" value="{{ old('alamat_rumah', $register->alamat_rumah??'') }}" class="form-control" id="inputSuccess2">
     </div>
-    <label class="col-form-label col-md-2 col-sm-2 label-align">Kodepos/No.Rumah</label>
-    <div class="col-md-2 col-9 form-group has-feedback">
-        <input type="text" name="kodepos" placeholder="Kodepos" value="{{ old('kodepos', $register->kodepos??'') }}" class="form-control" id="inputSuccess2">
+    <label class="col-form-label col-md-2 label-align">Kodepos/No.Rumah</label>
+    <div class="col-md-2 col-6 form-group has-feedback">
+        <input type="number" name="kodepos" placeholder="Kodepos" value="{{ old('kodepos', $register->kodepos??'') }}" class="form-control" id="inputSuccess2">
     </div>
-    <div class="col-md-2 col-9 form-group has-feedback">
-        <input type="text" name="no_rumah" placeholder="No Rumah" value="{{ old('no_rumah', $register->no_rumah??'') }}" class="form-control" id="inputSuccess2">
+    <div class="col-md-2 col-6 form-group has-feedback">
+        <input type="number" name="no_rumah" placeholder="No Rumah" value="{{ old('no_rumah', $register->no_rumah??'') }}" class="form-control" id="inputSuccess2">
     </div>
 
+    @push('css')
+        <link rel="stylesheet" href="{{ asset('backend/vendors/select2/dist/css/select2.min.css') }}">
+        <style>.select2-container--default .select2-selection--single{ border-radius: 0; border: 1px solid #ced4da;; }</style>
+    @endpush
     @push('js')
+        <script src="{{ asset('backend/vendors/select2/dist/js/select2.min.js') }}"></script>
         <script>
+            $('.select2').select2({width: '100%'})
             $('#sekolah').change(async function(){
                 if($(this).val()=='SMP/MTS LAINNYA'){
                     const { value: namasekolah } = await Swal.fire({
@@ -182,12 +204,12 @@
             setOption('kabupaten','regencies', 32); //Kode kabupaten tasikmalaya
             $("#kabupaten").on('change', function(){
                 let id = $(this).find(':selected').data('id');
-                $('#kecamatan').empty().append('<option></option>').parent().parent().fadeIn();
+                $('#kecamatan').empty().append('<option>----Pilih Kecamatan-----</option>').parent().parent().fadeIn();
                 setOption('kecamatan', 'districts', id);
             })
             $("#kecamatan").on('change', function(){
                 let id = $(this).find(':selected').data('id');
-                $('#kelurahan').empty().append('<option></option>').parent().parent().fadeIn();
+                $('#kelurahan').empty().append('<option>----Pilih Kelurahan-----</option>').parent().parent().fadeIn();
                 setOption('kelurahan', 'villages', id);
             })
             $('#kelurahan').on('change', function(){

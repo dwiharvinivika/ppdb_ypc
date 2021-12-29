@@ -92,7 +92,7 @@
                     }
                   @endphp
                   <div class="icon">
-                    <i class="ico icon-circled icon-bgdark icon-{{ $jurusan->gambar }} active icon-3x"></i>
+                      <img src="{{ asset('img/jurusan/'.$jurusan->gambar) }}" style="max-width: 85px;max-height: 130px" alt="">
                   </div>
                   <div class="text">
                     <h5>{!! $jurusan->jurusan !!}</h5>

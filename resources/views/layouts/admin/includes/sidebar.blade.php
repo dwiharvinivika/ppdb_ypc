@@ -18,9 +18,9 @@
         <ul class="nav side-menu">
             @canany(['admin','staff'])
             <li class="{{ request()->is('admin/index')?'active':'' }}"><a href="{{ url('admin/index') }}"><i class="fa fa-home"></i> Home</a> </li>
-            <li>
+            <li class="{{ request()->is(['admin/register*','admin/calon_siswa*','admin/siswa*'])?'active':'' }}">
                 <a><i class="fa fa-user"></i> Data Peserta/Siswa <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
+                <ul class="nav child_menu" style="display: {{ request()->is(['admin/register*','admin/calon_siswa*','admin/siswa*'])?'block':'none' }}">
                     <li class="{{ request()->routeIs('register.*')?'active':'' }}">
                         <a href="/admin/register" class="d-flex justify-content-between">
                             <span>Register</span>
@@ -38,16 +38,9 @@
             @endcanany
             @can('peserta')
                 <li><a href="/user/index">Dashboard</a></li>
-<<<<<<< HEAD
-                <li><a href="/user/konfirmasi_pembayaran">Konfirmasi Pembayaran</a></li>
-                <li><a href="/user/data-rapot">Data Raport</a></li>
-                <li><a href="/user/index">Data Prestasi</a></li>
-
-=======
                 <li><a href="/user/pembayaran">Konfirmasi Pembayaran</a></li>
                 <li><a href="/user/nilai-rapot">Nilai Rapot</a></li>
                 <li><a href="/user/data-prestasi">Data Prestasi</a></li>
->>>>>>> deb5266564b6bc9ebf0a186394618064773e04cb
             @endcan
         </ul>
     </div>

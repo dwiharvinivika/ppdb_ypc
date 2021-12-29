@@ -88,22 +88,31 @@
                 }
             })
         }
-        $('.hapus').on('click', function(){
-            $.ajax({
-                url: '/admin/testimoni/'+$(this).data('id'),
-                method: 'post',
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    _method: 'delete'
-                },
-                success: ()=>{
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Testimoni berhasil dihapus'
+        $(document).on('click', '.hapus', function(){
+            Swal.fire({
+                icon:'warning',
+                title: 'Apakah kamu yakin ingin menghapusnya?',
+                showCancelButton: true,
+                cancelButtonText: 'batal'
+            }).then(result=>{
+                if(result.isConfirmed){
+                    $.ajax({
+                        url: '/admin/testimoni/'+$(this).data('id'),
+                        method: 'post',
+                        data: {
+                            _token: $('input[name=_token]').val(),
+                            _method: 'delete'
+                        },
+                        success: ()=>{
+                            Toast.fire({
+                                icon: 'success',
+                                title: 'Testimoni berhasil dihapus'
+                            })
+                            table.draw()
+                        }
                     })
-                    table.draw()
                 }
-            })
+            });
         })
     </script>
 @endpush

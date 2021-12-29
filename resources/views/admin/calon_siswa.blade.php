@@ -47,7 +47,7 @@
                                     <td>{{ $pst->jk=='L'?'Laki-laki':'Perempuan' }}</td>
                                     <td>{{ $pst->sekolah }}</td>
                                     <td>{{ $pst->alamat_siswa }}</td>
-                                    <td><a href="" class="btn btn-sm btn-success"> Lihat </a></td>
+                                    <td><a href="/admin/orangtua/{{ $pst->orangtua->id }}" class="btn btn-sm btn-success"> Lihat </a></td>
                                     <td>
                                         <form action="{{ route('cetak_kartu', $pst) }}" target="_blank" method="post">
                                             @csrf

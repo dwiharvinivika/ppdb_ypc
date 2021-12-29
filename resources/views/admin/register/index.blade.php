@@ -33,7 +33,7 @@
                             </thead>
                             <tbody>
                                 @foreach( $register->sortByDesc('created_at') as $register)
-                                <tr>
+                                <tr class="{{ $register->is_read?'':'bg-info text-white' }}">
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $register->nisn }}</td>
                                     <td>{{ $register->nama }}</td>

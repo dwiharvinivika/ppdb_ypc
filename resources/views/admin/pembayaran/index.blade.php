@@ -14,13 +14,6 @@
         <div class="x_content">
             <div class="row">
                 <div class="col-sm-12">
-                    @if ($errors->any())
-                    <ul>
-                        @foreach ($errors->all() as $err)
-                        <li>{{ $err }}</li>
-                        @endforeach
-                    </ul>
-                    @endif
                     <div class="card-box table-responsive">
                         <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                             <thead>
@@ -50,10 +43,15 @@
                                     <td>{!! $register->status_pembayaran !!}</td>
                                     <td>
                                         @if ($register->pembayaran)
-                                            <input type="checkbox" {{ $register->pembayaran?'':'disable' }} data-off-text="Belum" data-on-text="Sudah" name="is_verified" id="" {{ $register->pembayaran->is_verified?'checked':'' }} data-id="{{ $register->pembayaran->id }}" value="1">
+                                        <input type="checkbox" {{ $register->pembayaran?'':'disable' }} data-off-text="Belum" data-on-text="Sudah" name="is_verified" id="" {{ $register->pembayaran->is_verified?'checked':'' }} data-id="{{ $register->pembayaran->id }}" value="1">
                                         @endif
                                     </td>
-                                    <td><a href="/admin/register/{{ $register->id }}" class="btn btn-sm btn-info"> Detail </a></td>
+                                    <td>
+                                        @if ($register->pembayaran&&$register->pembayaran->jns_pembayaran=='transfer'&&!is_null($register->pembayaran->bukti))
+                                        <a href="{{ asset('storage/bukti/'.$register->pembayaran->bukti) }}" data-fslightbox="{{ $loop->iteration }}" class="btn btn-sm btn-success">Bukti</a>
+                                        @endif
+                                        <a href="/admin/register/{{ $register->id }}" class="btn btn-sm btn-info"> Detail </a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -116,6 +114,7 @@
 @endsection
 
 @push('js')
+    <script src="{{ asset('js/fslightbox.js') }}"></script>
     <script>
         $('.jenis_pembayaran').on('change', function(){
             let id = $(this).data('id');

@@ -29,7 +29,7 @@
                         {{-- <input type="file" name="avatar" id="avatar" placeholder="Nama Lengkap sesuai Ijazah terakhir" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                         <div class="validation"></div> --}}
                         <label class="file">
-                            <input type="file" id="avatar" name="avatar" aria-label="File browser example">
+                            <input type="file" id="avatar" name="avatar" aria-label="File browser example" accept="image/*">
                             <span class="file-custom">Silahkan pilih avatar...</span>
                         </label>
                     </div>

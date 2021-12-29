@@ -60,12 +60,3 @@
     </div>
 </div>
 @endsection
-
-@push('js')
-    <script>
-        $('input[type=file]').on('change', function(){
-            const [file] = $(this)[0].files;
-            $(this).next().text(file.name)
-        })
-    </script>
-@endpush

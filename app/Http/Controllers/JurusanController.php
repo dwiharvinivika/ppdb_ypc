@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class JurusanController extends Controller
 {
@@ -16,7 +17,6 @@ class JurusanController extends Controller
     {
         $jurusan = Jurusan::all();
         return view('admin.jurusan.index', compact('jurusan'));
-
     }
 
     /**
@@ -40,9 +40,13 @@ class JurusanController extends Controller
         $validate = $request->validate([
             'kode_jurusan' => 'required',
             'jurusan' => 'required',
-            'gambar' => 'required',
+            'gambar' => 'required|image',
             'keterangan' => 'nullable'
         ]);
+        $logo = $request->file('gambar');
+        $nama = 'logo-'.Str::slug(strip_tags($validate['jurusan'])).'.'.$logo->getClientOriginalExtension();
+        $logo->move('img/jurusan/', $nama);
+        $validate['gambar'] = $nama;
         Jurusan::create($validate);
         return redirect('admin/jurusan')->with('success','Data berhasil ditambahkan');
     }
@@ -78,12 +82,24 @@ class JurusanController extends Controller
      */
     public function update(Request $request, Jurusan $jurusan)
     {
-        $jurusan->update([
-            'kode_jurusan' => $request->kode_jurusan,
-            'jurusan' => $request->jurusan,
-            'gambar' => $request->gambar,
-            'keterangan' => $request->keterangan
+        $validate = $request->validate([
+            'kode_jurusan' => 'required',
+            'jurusan' => 'required',
+            'gambar' => 'sometimes|image',
+            'keterangan' => 'nullable'
         ]);
+
+        if($request->hasFile('gambar')){
+            if(file_exists(public_path('img/jurusan/'.$jurusan->gambar))){
+                unlink(public_path('img/jurusan/'.$jurusan->gambar));
+            }
+            $logo = $request->file('gambar');
+            $nama = 'logo-'.Str::slug(strip_tags($validate['jurusan'])).'.'.$logo->getClientOriginalExtension();
+            $logo->move('img/jurusan/', $nama);
+            $validate['gambar'] = $nama;
+        }
+
+        $jurusan->update($validate);
         return redirect('admin/jurusan')->with('success','Data berhasil diubah');
     }
 
@@ -95,6 +111,9 @@ class JurusanController extends Controller
      */
     public function destroy(Jurusan $jurusan)
     {
+        if(file_exists(public_path('img/jurusan/'.$jurusan->gambar))){
+            unlink(public_path('img/jurusan/'.$jurusan->gambar));
+        }
         $jurusan->delete();
         return redirect('admin/jurusan')->with('success','Data berhasil dihapus');
     }

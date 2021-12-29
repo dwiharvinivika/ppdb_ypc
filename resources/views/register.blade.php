@@ -17,6 +17,8 @@
     <link href="{{asset('backend') }}/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="{{asset('backend') }}/build/css/custom.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('backend/vendors/select2/dist/css/select2.min.css') }}">
+    @livewireStyles()
     <style>
         @media (min-width: 480px) {
             .container{ max-width: 460px; }
@@ -31,8 +33,19 @@
             .container{ max-width: 1080px; }
         }
         .container{ margin-top: 15px; }
+        .select2-container--default .select2-selection--single{
+            border-radius: 0;
+            border: 1px solid #ced4da;;
+        }
+        .noscroll::-webkit-outer-spin-button,
+        .noscroll::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .noscroll {
+            -moz-appearance: textfield;
+        }
     </style>
-    @livewireStyles
 </head>
 <body>
     <div class="container">
@@ -109,6 +122,7 @@
     <script src="{{asset('backend') }}/build/js/custom.js"></script>
     <!-- jQuery Smart Wizard -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script> $('.noscroll').on('mousewheel',function(){ $(this).blur() }) </script>
     @if (session()->has('success'))
         <script>
             Toast.fire({

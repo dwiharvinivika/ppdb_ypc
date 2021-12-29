@@ -15,7 +15,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <form method="post" action="{{ route('jurusan.update', $jurusan) }}" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                    <form method="post" action="{{ route('jurusan.update', $jurusan) }}" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
                         @method('put')
                         @include('admin.jurusan._form', compact('jurusan'))
                         <div class="ln_solid"></div>

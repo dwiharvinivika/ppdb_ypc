@@ -56,6 +56,7 @@ Route::group(['prefix'=>'admin/', 'middleware'=>['auth','role:super_admin,admin'
 
     //Register
     Route::resource('register', RegisterController::class);
+    Route::get('orangtua/{orangtua}', 'RegisterController@orang_tua');
 
     Route::get('calon_siswa', 'PesertaController@index');
     Route::get('siswa', 'PesertaController@siswa');

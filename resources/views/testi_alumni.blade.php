@@ -9,7 +9,7 @@
             {{ $testimoni->message }}
         </blockquote>
         <div class="testimonial-autor">
-          <img src="{{ asset('img/avatars/'.$testimoni->avatar) }}" alt="" />
+          <img style="max-height: 230px; max-width: 230px" src="{{ asset('img/avatars/'.$testimoni->avatar) }}" alt="" />
           <h4>{{ $testimoni->name }}</h4>
           <a href="#">{{ $testimoni->company_name }}</a>
         </div>

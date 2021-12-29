@@ -15,7 +15,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <form method="post" action="/admin/jurusan" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                    <form method="post" action="/admin/jurusan" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
                         @include('admin.jurusan._form')
                         <div class="ln_solid"></div>
                         <div class="item form-group">

@@ -142,7 +142,7 @@
                   <tr>
                     <td colspan="3">
                         <a href="/admin/register" class="btn btn-sm btn-success"> Kembali </a>
-                        <a href="/admin/orangtua/{{ $register->id }}" class="btn btn-sm btn-info"> Input Data Orangtua </a>
+                        <a href="/admin/orangtua/{{ $register->id }}" class="btn btn-sm btn-info"> Lihat Data Orangtua </a>
                     </td>
                   </tr>
                 </tbody>

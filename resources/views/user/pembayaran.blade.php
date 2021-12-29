@@ -96,7 +96,6 @@
     <script>
         $('#bukti').on('change', function(){
             const [file] = $(this)[0].files;
-            $(this).next().text(file.name)
             if(file){
                 $('#preview-img').attr('src', URL.createObjectURL(file));
             }

@@ -163,15 +163,11 @@ class RegisterController extends Controller
         return view('jadwal', compact('gelombang'));
     }
 
-    public function whatsappNotification(string $recipient)
+    public function orang_tua(Orangtua $orangtua)
     {
-        // $sid    = getenv("TWILIO_AUTH_SID");
-        // $token  = getenv("TWILIO_AUTH_TOKEN");
-        // $wa_from= getenv("TWILIO_WHATSAPP_FROM");
-        // $twilio = new \Twilio\Rest\Client($sid, $token);
-
-        // $body = "Hello, welcome to codelapan.com.";
-
-        // return $twilio->messages->create("whatsapp:$recipient",["from" => "whatsapp:$wa_from", "body" => $body]);
+        $anak = ['anak'=>$orangtua->anak];
+        $ortu = array_merge($anak,collect($orangtua->toArray())->except('id','register_id')->toArray());
+        return view('admin.register.orangtua', compact('ortu'));
     }
+
 }
