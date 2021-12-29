@@ -7,6 +7,7 @@
 /public/img/slides/*
 /public/img/avatars/*
 /public/img/mitra-kerja/*
+/public/img/jurusan/*
 /storage/*.key
 /vendor
 .env
