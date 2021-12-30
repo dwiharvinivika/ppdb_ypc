@@ -14,7 +14,7 @@ class CreateAsalSekolahTable extends Migration
     public function up()
     {
         Schema::create('asal_sekolah', function (Blueprint $table) {
-            $table->integer('kodesekolah')->primary()->autoIncrement();
+            $table->integer('kodesekolah')->autoIncrement();
             $table->string('namasekolah');
             $table->integer('npsn')->nullable();
             $table->float('indexsekolah')->nullable();

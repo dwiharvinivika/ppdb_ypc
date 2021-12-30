@@ -1,33 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 5.0.3
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Waktu pembuatan: 20 Des 2021 pada 07.47
--- Versi server: 10.4.14-MariaDB
--- Versi PHP: 7.3.23
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `ppdb`
---
-
--- --------------------------------------------------------
-
-
---
--- Dumping data untuk tabel `asalsekolah`
---
-
 INSERT INTO `asal_sekolah` (`kodesekolah`, `namasekolah`, `npsn`, `indexsekolah`) VALUES
 (2260000, 'SMP/MTS LAINNYA', 202100, 50),
 (2260001, 'SMP NEGERI 1 CIAWI', 20210829, 64.44),
@@ -506,18 +476,3 @@ INSERT INTO `asal_sekolah` (`kodesekolah`, `namasekolah`, `npsn`, `indexsekolah`
 (2260711, 'BAHRUL HUDA', 69955920, 36.57),
 (2260712, 'CAYUR', 69976286, 36.67),
 (2260713, 'CIHONJE', 69976287, 44.99);
-
---
--- Indexes for dumped tables
---
-
---
--- Indeks untuk tabel `asalsekolah`
---
-ALTER TABLE `asal_sekolah`
-  ADD PRIMARY KEY (`kodesekolah`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
