@@ -79,12 +79,15 @@ class GelombangController extends Controller
      */
     public function update(Request $request, Gelombang $gelombang)
     {
-        $gelombang->update([
-            'gelombang' => $request->gelombang,
-            'pendaftaran' => $request->pendaftaran,
-            'pengumuman' => $request->pengumuman,
-            'daftar_ulang' => $request->daftar_ulang
+        $validate = $request->validate([
+            'tahun_ajaran_id' => 'required',
+            'gelombang' => 'required',
+            'pendaftaran_awal' => 'required|date',
+            'pendaftaran_akhir' => 'required|date',
+            'pengumuman' => 'required',
+            'daftar_ulang' => 'required'
         ]);
+        $gelombang->update($validate);
         return redirect('admin/gelombang')->with('success','Data berhasil diubah');
     }
 

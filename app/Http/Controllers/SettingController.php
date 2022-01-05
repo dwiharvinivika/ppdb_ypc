@@ -36,7 +36,7 @@ class SettingController extends Controller
             $logo = $request->file('logo');
             $name = 'logo.'.$logo->getClientOriginalExtension();
             $logo->move('img/', $name);
-            $validate['logo'] = $name;
+            $validate['logo'] = '/img/'.$name;
         }else{
             $validate['logo'] = setting('web_setting')['logo'];
         }

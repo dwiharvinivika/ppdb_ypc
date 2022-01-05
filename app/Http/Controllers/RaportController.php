@@ -35,8 +35,22 @@ class RaportController extends Controller
         return view('admin.raport.show', compact('register', 'info'));
     }
 
-    public function update(Request $request)
+    public function edit(Register $register)
     {
+        $nilai = [1=>'Matematika', 'Bahasa_Indonesia', 'Bahasa_Inggris', 'IPA', 'Pendidikan_Agama_Islam'];
+        $raports = $register->raports;
+        $values = [];
+        for ($i=1; $i <= 5; $i++) {
+            foreach(array_merge($nilai,['rangking']) as $name){
+                $values[$name][$i] = old($name.'.'.$i ,$raports[$i-1]->$name??0);
+            }
+        }
+        return view('user.rapot', compact('nilai','values'));
+    }
+
+    public function update(Request $request, Register $register = null)
+    {
+        $register_id = $register->id ?? auth()->user()->register->id;
         $validate = $request->validate([
             'Matematika.*' => 'required|integer',
             'Bahasa_Indonesia.*' => 'required|integer',
@@ -50,7 +64,7 @@ class RaportController extends Controller
         for ($i=1; $i <= 5; $i++) {
             $raport = [];
             if($request->hasFile('semester.'.$i)){
-                $bukti = auth()->user()->register->id.'-semester-'.$i.'.'.$request->file('semester.'.$i)->getClientOriginalExtension();
+                $bukti = $register_id.'-semester-'.$i.'.'.$request->file('semester.'.$i)->getClientOriginalExtension();
                 $request->file('semester.'.$i)->move('images/raports/', $bukti);
                 $raport['bukti']=$bukti;
             }
@@ -60,7 +74,7 @@ class RaportController extends Controller
                 }
             }
             Raport::updateOrCreate([
-                'register_id'=>auth()->user()->register->id,
+                'register_id'=>$register_id,
                 'semester' => $i
             ], $raport);
         }

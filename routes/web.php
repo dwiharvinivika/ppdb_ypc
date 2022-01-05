@@ -69,6 +69,8 @@ Route::group(['prefix'=>'admin/', 'middleware'=>['auth','role:super_admin,admin'
 
     Route::get('nilai-raport', 'RaportController@admin');
     Route::get('nilai-raport/{register}', 'RaportController@show');
+    Route::get('nilai-raport/{register}/edit', 'RaportController@edit');
+    Route::post('nilai-raport/{register}/edit', 'RaportController@update');
 
     Route::middleware('role:super_admin')->group(function(){
         Route::resource('user', UserController::class);

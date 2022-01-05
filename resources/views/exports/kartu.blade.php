@@ -60,7 +60,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <img src="{{ public_path('images/Logo-SMK-YPC.png') }}" alt="" srcset="" style="max-height: 110px; margin-top: 15px;">
+            <img src="{{ public_path('img/Logo-SMK-YPC.png') }}" alt="" srcset="" style="max-height: 110px; margin-top: 15px;">
             <div class="kop">
                 <h3>KARTU PESERTA</h3>
                 <h3>PENERIMAAN CALON PESERTA DIDIK BARU</h3>

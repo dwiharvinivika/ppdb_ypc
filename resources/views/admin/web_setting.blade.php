@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="col-md-12 col-sm-12 ">
+    <x-errors-validation/>
     <div class="x_panel">
         <div class="x_title">
             <h2><strong>Web Setting</strong></h2>
@@ -12,9 +13,9 @@
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
-            <form action="{{ url('admin/web_setting') }}" method="post">
+            <form action="{{ url('admin/web_setting') }}" method="post" enctype="multipart/form-data">
                 <div class="d-flex justify-content-center mb-4">
-                    <img src="{{ asset('img/logo.JPG') }}" alt="" id="preview-logo" class="img-thumbnail w-50">
+                    <img src="{{ $web_setting['logo'] }}" alt="" id="preview-logo" class="img-thumbnail w-50">
                 </div>
                 @csrf
                 <div class="row">
