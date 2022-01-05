@@ -34,7 +34,7 @@
                 </ul>
             </li>
             <li class="{{ request()->is('admin/pembayaran')?'active':'' }}"><a href="/admin/pembayaran"><i class="fa fa-money"></i> Pembayaran</a></li>
-            <li class="{{ request()->is('admin/nilai-raport*')?'active':'' }}"><a href="nilai-raport"><i class="fa fa-file-text-o"></i> Nilai Raport</a></li>
+            <li class="{{ request()->is('admin/nilai-raport*')?'active':'' }}"><a href="/admin/nilai-raport"><i class="fa fa-file-text-o"></i> Nilai Raport</a></li>
             @endcanany
             @can('peserta')
                 <li><a href="/user/index">Dashboard</a></li>
