@@ -17,12 +17,18 @@
             <div class="row">
                 <div class="col-sm-12 col-md-6">
                     <label for="">Background</label>
-                    <input type="file" class="form-control" name="bg" data-slide="{{ $i }}">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="bg" data-slide="{{ $i }}">
+                        <label for="" class="custom-file-label">Pilih Gambar</label>
+                    </div>
                     <img id="bg-{{ $i }}" src="{{ asset($slide['bg']) }}" alt="" class="img-thumbnail">
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <label for="">Content</label>
-                    <input type="file" class="form-control" name="content" data-slide="{{ $i }}">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="content" data-slide="{{ $i }}">
+                        <label for="" class="custom-file-label">Pilih Gambar</label>
+                    </div>
                     <img id="content-{{ $i }}" src="{{ asset($slide['content']) }}" alt="" class="img-thumbnail">
                 </div>
             </div>

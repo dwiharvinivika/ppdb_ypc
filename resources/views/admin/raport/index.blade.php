@@ -39,7 +39,8 @@
                                     <td>{{ $r->avgRaportValue(5)??0 }}</td>
                                     <td>{{ $r->sum_achievement }}</td>
                                     <td>
-                                        <a href="/admin/nilai-raport/{{ $r->id }}/edit" class="btn btn-success">Edit</a>
+                                        <a href="/admin/nilai-raport/{{ $r->id }}/edit" class="btn btn-success">Raport</a>
+                                        <a href="/admin/nilai-raport/{{ $r->id }}/prestasi" class="btn btn-primary">Prestasi</a>
                                         <a href="/admin/nilai-raport/{{ $r->id }}" class="btn btn-info">Detail</a>
                                     </td>
                                 </tr>

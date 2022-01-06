@@ -9,7 +9,7 @@
       <!-- slideshow start here -->
       <div class="camera_wrap" id="camera-slide">
         <!-- slide 1 here -->
-        <div data-src="{{ $slides[0]['bg'] }}">
+        <div data-src="{{ $slides[0]['bg'] }}" style="height: 100%">
           <div class="camera_caption fadeFromLeft">
             <div class="container">
               <div class="row">
@@ -32,7 +32,7 @@
         </div>
 
         <!-- slide 2 here -->
-        <div data-src="{{ $slides[1]['bg'] }}">
+        <div data-src="{{ $slides[1]['bg'] }}" style="height: 100%">
           <div class="camera_caption fadeFromLeft">
             <div class="container">
               <div class="row">
@@ -55,7 +55,7 @@
         </div>
 
         <!-- slide 3 here -->
-        <div data-src="{{ $slides[2]['bg'] }}">
+        <div data-src="{{ $slides[2]['bg'] }}" style="height: 100%">
           <div class="camera_caption fadeFromLeft">
             <div class="container">
               <div class="row">

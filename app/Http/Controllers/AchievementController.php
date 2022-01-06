@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Achievement;
+use App\Models\Register;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -16,7 +17,14 @@ class AchievementController extends Controller
         return view('user.achievement', compact('categories', 'achievements'));
     }
 
-    public function store(Request $request)
+    public function edit(Register $register)
+    {
+        $categories = DB::table('achievement_categories')->limit(13)->pluck('tingkat');
+        $achievements = $register->achievements;
+        return view('user.achievement', compact('categories', 'achievements'));
+    }
+
+    public function store(Request $request, Register $register = null)
     {
         $validate = $request->validate([
             'nama_prestasi' => 'required',
@@ -28,7 +36,7 @@ class AchievementController extends Controller
         $bukti = Str::slug($validate['nama_prestasi']).uniqid().'.'.$request->file('bukti')->getClientOriginalExtension();
         $request->file('bukti')->move('images/bukti/', $bukti);
         $validate['bukti'] = $bukti;
-        $validate['register_id'] = $request->user()->register->id;
+        $validate['register_id'] = $register->id??$request->user()->register->id;
         Achievement::create($validate);
         return back()->with('success', 'Data Prestasi berhasil ditambahkan');
     }

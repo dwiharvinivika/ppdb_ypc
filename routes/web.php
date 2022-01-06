@@ -71,6 +71,8 @@ Route::group(['prefix'=>'admin/', 'middleware'=>['auth','role:super_admin,admin'
     Route::get('nilai-raport/{register}', 'RaportController@show');
     Route::get('nilai-raport/{register}/edit', 'RaportController@edit');
     Route::post('nilai-raport/{register}/edit', 'RaportController@update');
+    Route::get('nilai-raport/{register}/prestasi', 'AchievementController@edit');
+    Route::post('nilai-raport/{register}/prestasi', 'AchievementController@store');
 
     Route::middleware('role:super_admin')->group(function(){
         Route::resource('user', UserController::class);
@@ -119,7 +121,8 @@ Route::group(['middleware'=>['auth','role:peserta'], 'prefix'=>'user'], function
     Route::post('nilai-rapot', 'RaportController@update');
     Route::get('data-prestasi', 'AchievementController@index');
     Route::post('data-prestasi', 'AchievementController@store');
-    Route::delete('data-prestasi/{achievement}', 'AchievementController@destroy')->name('data-prestasi.delete');
+    Route::delete('data-prestasi/{achievement}', 'AchievementController@destroy')->name('data-prestasi.delete')
+        ->withoutMiddleware('role:peserta')->middleware('role:peserta,admin,super_admin');
 });
 
 Route::post('tambah-nama-sekolah', function(Request $request){
